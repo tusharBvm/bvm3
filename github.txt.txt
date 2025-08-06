@@ -1,0 +1,13 @@
+bvm intership folder open
+
+
+second time push data 
+git add .
+git commit -m "newwwww" 
+git push
+
+
+// signup all field 
+// login page using email password
+// table view in formData all 
+// field first name , last name, email ,password,gender,language,city,phone no.,age
