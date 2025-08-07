@@ -31,3 +31,8 @@
     color: white;
     margin-top: 50px;   
 }
+
+.error-message{
+color: red;
+font-size: 14px;
+}

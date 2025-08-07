@@ -120,9 +120,11 @@ function MultiFieldCrud() {
   }
 
   const validateForm = (errorData) => {
-    // console.log("errorData==>", errorData);
+    console.log("errorData==>", errorData);
 
     const errors = {};
+    console.log("errors==>",errors);
+    
 
     if (!errorData.firstName.trim()) {
       errors.firstName = "firstName is required";

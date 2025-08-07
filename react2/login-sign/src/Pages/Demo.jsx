@@ -13,98 +13,44 @@ function Signup() {
     age: "",
   });
 
-  // console.log("formData ==>",formData);
- 
-  
-  const [errors, setErrors] = useState({});
-
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    // console.log("name ==>",name);
-    // console.log("value==>", value);
-    // console.log("type==>", type);
-    // console.log("checked==>", checked);
-    // console.log("firstaname ==>",formData.firstName);
-    
-
-    // setFormData((prevFormData) => ({
-    //   ...prevFormData,
-    //   [name]: value,
-    // }));
-
-    
-
 
     if (type === "checkbox") {
       if (name === "languages") {
-        setFormData((prev) => {
+        setFormData(prev => {
           if (checked) {
-            // console.log("prev ==>", prev);
-            // console.log("prev lang ==>",[...prev.languages, value]);
             return {
               ...prev,
-              languages: [...prev.languages, value],
+              languages: [...prev.languages, value]
             };
           } else {
-            // console.log("prev ==>", prev);
-            // console.log("prev lang filter==>", prev.languages.filter((lang) => lang !== value));
             return {
               ...prev,
-              languages: prev.languages.filter((lang) => lang !== value),
+              languages: prev.languages.filter(lang => lang !== value)
             };
           }
         });
       }
     } else {
-      setFormData((prev) => ({
+      setFormData(prev => ({
         ...prev,
-        [name]: value,
+        [name]: value
       }));
     }
-
-
-    // setFormData({ ...formData, [name]: value });
-
-    // console.log("[name]==>", [name]);
   };
 
   function submitHandler(e) {
     e.preventDefault();
-    // console.log("formData ==>", formData);
-    // console.log(formData.firstName);
-
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      gender,
-      city,
-      languages,
-      phone,
-      age,
-    } = formData;
-    // console.log(firstName + "," + lastName+ ","+ email + "," + password + "," + gender + "," + city + "," + languages + "," + phone + "," + age );
-
-
-    let newErrors = validateForm({
-      firstName,
-      lastName,
-      email,
-      password,
-      gender,
-      city,
-      languages,
-      phone,
-      age,
-    });
-
-    // console.log("new errors ==> ", newErrors);
-    setErrors(newErrors);
-
-    // localStorage.setItem("form-store", JSON.stringify(formData));
-
+    
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const newUser = { ...formData, id: Date.now() }; 
+    const updatedUsers = [...existingUsers, newUser];
+    
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+    
+    console.log("Form data saved to localStorage:", newUser);
+    
     setFormData({
       firstName: "",
       lastName: "",
@@ -116,65 +62,18 @@ function Signup() {
       phone: "",
       age: "",
     });
+    
+    alert("Registration successful!");
   }
-
-  const validateForm = (errorData) => {
-    // console.log("errorData ==>", errorData);
-
-    const errors = {};
-    // console.log("errors ==>", errors);
-
-    if (!errorData.firstName.trim()) {
-      errors.firstName = "FirstName is required";
-    }
-
-    if (!errorData.lastName.trim()) {
-      errors.lastName = "LastName is required";
-    }
-
-    if (!errorData.email.trim()) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(errorData.email)) {
-      errors.email = "Email is invalid";
-    }
-
-    if (!errorData.password) {
-      errors.password = "Password is required";
-    } else if (errorData.password.length < 8) {
-      errors.password = "Password must be at least 8 characters long";
-    }
-
-    if (!errorData.gender) {
-      errors.gender = "Gender is required";
-    }
-
-    if (!errorData.city) {
-      errors.city = "City is required";
-    }
-
-    if (errorData.languages.length == 0) {
-      errors.languages = "Language is required";
-    }
-
-    if (!errorData.phone) {
-      errors.phone = "Please enter a valid 10-digit phone number";
-    }
-
-    if (!errorData.age) {
-      errors.age = "Age Is required";
-    }
-
-    return errors;
-  };
 
   return (
     <>
       <div className="main">
         <div className="sign-cnt">
           <div>
-            <h2 className="text-center mb-3 ">Signup</h2>
+            <h2 className="text-center mb-3">Signup</h2>
           </div>
-          <form>
+          <form onSubmit={submitHandler}>
             <div className="d-flex gap-3">
               <div className="mb-3">
                 <label className="form-label">First Name</label>
@@ -184,13 +83,11 @@ function Signup() {
                   name="firstName"
                   onChange={handleChange}
                   value={formData.firstName}
+                  required
                 />
-                {errors.firstName && (
-                  <span className="error-message">{errors.firstName}</span>
-                )}
               </div>
 
-              <div className="mb-3 ">
+              <div className="mb-3">
                 <label className="form-label">Last Name</label>
                 <input
                   type="text"
@@ -198,10 +95,8 @@ function Signup() {
                   name="lastName"
                   onChange={handleChange}
                   value={formData.lastName}
+                  required
                 />
-                {errors.lastName && (
-                  <span className="error-message">{errors.lastName}</span>
-                )}
               </div>
             </div>
             <div className="d-flex gap-3">
@@ -213,10 +108,8 @@ function Signup() {
                   name="email"
                   onChange={handleChange}
                   value={formData.email}
+                  required
                 />
-                {errors.email && (
-                  <span className="error-message">{errors.email}</span>
-                )}
               </div>
 
               <div className="mb-3">
@@ -227,13 +120,11 @@ function Signup() {
                   name="password"
                   onChange={handleChange}
                   value={formData.password}
+                  required
                 />
-                {errors.password && (
-                  <span className="error-message">{errors.password}</span>
-                )}
               </div>
             </div>
-            <div className="d-flex ">
+            <div className="d-flex">
               <div className="mb-3 col-6">
                 <label className="form-label">Gender</label>
                 <br />
@@ -254,10 +145,7 @@ function Signup() {
                   onChange={handleChange}
                   checked={formData.gender === "Female"}
                 />
-                &nbsp; Female <br />
-                {errors.gender && (
-                  <span className="error-message">{errors.gender}</span>
-                )}
+                &nbsp; Female
               </div>
 
               <div className="mb-3 cnt-set col-6">
@@ -267,15 +155,13 @@ function Signup() {
                   name="city"
                   onChange={handleChange}
                   value={formData.city}
+                  required
                 >
                   <option value="">Select City</option>
                   <option value="Surat">Surat</option>
                   <option value="Rajkot">Rajkot</option>
                   <option value="Junagadh">Junagadh</option>
                 </select>
-                {errors.city && (
-                  <span className="error-message">{errors.city}</span>
-                )}
               </div>
             </div>
             <div>
@@ -291,10 +177,7 @@ function Signup() {
                       onChange={handleChange}
                       checked={formData.languages.includes("English")}
                     />
-                    &nbsp; English <br />
-                    {errors.languages && (
-                      <span className="error-message">{errors.languages}</span>
-                    )}
+                    &nbsp; English
                   </div>
                   <div>
                     <input
@@ -322,7 +205,7 @@ function Signup() {
               </div>
             </div>
             <div className="d-flex gap-3">
-              <div className="mb-3 ">
+              <div className="mb-3">
                 <label className="form-label">Phone No.</label>
                 <input
                   type="tel"
@@ -333,10 +216,8 @@ function Signup() {
                   name="phone"
                   onChange={handleChange}
                   value={formData.phone}
+                  required
                 />
-                {errors.phone && (
-                  <span className="error-message">{errors.phone}</span>
-                )}
               </div>
 
               <div className="mb-3 col-6">
@@ -347,20 +228,16 @@ function Signup() {
                   min={1}
                   max={100}
                   name="age"
+                  onChange={handleChange}
                   value={formData.age}
                   required
-                  onChange={handleChange}
                 />
-                {errors.age && (
-                  <span className="error-message">{errors.age}</span>
-                )}
               </div>
             </div>
             <div className="mb-3 mt-3">
               <button
                 type="submit"
                 className="form-control submit"
-                onClick={submitHandler}
               >
                 Signup
               </button>
