@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+// const [list, setList] = useState(() => {
+//     const storeList = localStorage.getItem("list-data");
+//     //  console.log("storelist==>",storeList);
+//     return storeList ? JSON.parse(storeList) : [];
+//   });
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -14,10 +20,12 @@ function Signup() {
   });
 
   // console.log("formData ==>",formData);
- 
-  
-  const [errors, setErrors] = useState({});
 
+
+  // tare multiple value table ma add thay che
+  // em nai 3-4 data nakh to table ma em
+
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -26,15 +34,11 @@ function Signup() {
     // console.log("type==>", type);
     // console.log("checked==>", checked);
     // console.log("firstaname ==>",formData.firstName);
-    
 
     // setFormData((prevFormData) => ({
     //   ...prevFormData,
     //   [name]: value,
     // }));
-
-    
-
 
     if (type === "checkbox") {
       if (name === "languages") {
@@ -63,7 +67,6 @@ function Signup() {
       }));
     }
 
-
     // setFormData({ ...formData, [name]: value });
 
     // console.log("[name]==>", [name]);
@@ -72,7 +75,8 @@ function Signup() {
   function submitHandler(e) {
     e.preventDefault();
     // console.log("formData ==>", formData);
-    // console.log(formData.firstName);
+
+    // console.log("formData ==>", formData);
 
     const {
       firstName,
@@ -87,6 +91,33 @@ function Signup() {
     } = formData;
     // console.log(firstName + "," + lastName+ ","+ email + "," + password + "," + gender + "," + city + "," + languages + "," + phone + "," + age );
 
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !gender ||
+      !city ||
+      languages.length == 0 ||
+      !phone ||
+      !age
+    ) {
+      let newErrors = validateForm({
+        firstName,
+        lastName,
+        email,
+        password,
+        gender,
+        city,
+        languages,
+        phone,
+        age,
+      });
+
+      // console.log("new errors ==> ", newErrors);
+      setErrors(newErrors);
+      return;
+    }
 
     let newErrors = validateForm({
       firstName,
@@ -103,8 +134,6 @@ function Signup() {
     // console.log("new errors ==> ", newErrors);
     setErrors(newErrors);
 
-    // localStorage.setItem("form-store", JSON.stringify(formData));
-
     setFormData({
       firstName: "",
       lastName: "",
@@ -116,7 +145,20 @@ function Signup() {
       phone: "",
       age: "",
     });
+
+    console.log("formData ==>", formData);
+
+    localStorage.setItem("form-store", JSON.stringify(formData));
   }
+
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem("form-store");
+  //   console.log("stored data ",storedData);
+
+  //   if (storedData) {
+  //     setFormData(JSON.parse(storedData));
+  //   }
+  // }, []);
 
   const validateForm = (errorData) => {
     // console.log("errorData ==>", errorData);
@@ -373,3 +415,8 @@ function Signup() {
 }
 
 export default Signup;
+
+// issue
+// empty data added on form
+// when submit button click form reset its ook but when empty field form not reset value showing error
+// local storage in store in one data when i enter new data old data remove automatically and mew data store
