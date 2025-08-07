@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function Signup() {
+function Demo() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -13,240 +13,209 @@ function Signup() {
     age: "",
   });
 
+  const [submittedData, setSubmittedData] = useState([]); 
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("form-store");
+    if (storedData) {
+      setSubmittedData(JSON.parse(storedData));
+    }
+  }, []);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
     if (type === "checkbox") {
       if (name === "languages") {
-        setFormData(prev => {
+        setFormData((prev) => {
           if (checked) {
             return {
               ...prev,
-              languages: [...prev.languages, value]
+              languages: [...prev.languages, value],
             };
           } else {
             return {
               ...prev,
-              languages: prev.languages.filter(lang => lang !== value)
+              languages: prev.languages.filter((lang) => lang !== value),
             };
           }
         });
       }
     } else {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [name]: value
+        [name]: value,
       }));
     }
   };
 
   function submitHandler(e) {
     e.preventDefault();
-    
-    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-    const newUser = { ...formData, id: Date.now() }; 
-    const updatedUsers = [...existingUsers, newUser];
-    
-    localStorage.setItem('users', JSON.stringify(updatedUsers));
-    
-    console.log("Form data saved to localStorage:", newUser);
-    
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      gender: "",
-      city: "",
-      languages: [],
-      phone: "",
-      age: "",
+
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      gender,
+      city,
+      languages,
+      phone,
+      age,
+    } = formData;
+
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !gender ||
+      !city ||
+      languages.length == 0 ||
+      !phone ||
+      !age
+    ) {
+      let newErrors = validateForm({
+        firstName,
+        lastName,
+        email,
+        password,
+        gender,
+        city,
+        languages,
+        phone,
+        age,
+      });
+
+      setErrors(newErrors);
+      return;
+    }
+
+    let newErrors = validateForm({
+      firstName,
+      lastName,
+      email,
+      password,
+      gender,
+      city,
+      languages,
+      phone,
+      age,
     });
-    
-    alert("Registration successful!");
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      const newSubmittedData = [...submittedData, formData];
+      setSubmittedData(newSubmittedData);
+      localStorage.setItem("form-store", JSON.stringify(newSubmittedData));
+      
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        gender: "",
+        city: "",
+        languages: [],
+        phone: "",
+        age: "",
+      });
+    }
   }
+
+  const validateForm = (errorData) => {
+    const errors = {};
+
+    if (!errorData.firstName.trim()) {
+      errors.firstName = "FirstName is required";
+    }
+
+    if (!errorData.lastName.trim()) {
+      errors.lastName = "LastName is required";
+    }
+
+    if (!errorData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(errorData.email)) {
+      errors.email = "Email is invalid";
+    }
+
+    if (!errorData.password) {
+      errors.password = "Password is required";
+    } else if (errorData.password.length < 8) {
+      errors.password = "Password must be at least 8 characters long";
+    }
+
+    if (!errorData.gender) {
+      errors.gender = "Gender is required";
+    }
+
+    if (!errorData.city) {
+      errors.city = "City is required";
+    }
+
+    if (errorData.languages.length == 0) {
+      errors.languages = "Language is required";
+    }
+
+    if (!errorData.phone) {
+      errors.phone = "Please enter a valid 10-digit phone number";
+    }
+
+    if (!errorData.age) {
+      errors.age = "Age Is required";
+    }
+
+    return errors;
+  };
 
   return (
     <>
       <div className="main">
         <div className="sign-cnt">
           <div>
-            <h2 className="text-center mb-3">Signup</h2>
+            <h2 className="text-center mb-3 ">Signup</h2>
           </div>
-          <form onSubmit={submitHandler}>
-            <div className="d-flex gap-3">
-              <div className="mb-3">
-                <label className="form-label">First Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="firstName"
-                  onChange={handleChange}
-                  value={formData.firstName}
-                  required
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Last Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="lastName"
-                  onChange={handleChange}
-                  value={formData.lastName}
-                  required
-                />
-              </div>
-            </div>
-            <div className="d-flex gap-3">
-              <div className="mb-3">
-                <label className="form-label">Email</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  name="email"
-                  onChange={handleChange}
-                  value={formData.email}
-                  required
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="password"
-                  onChange={handleChange}
-                  value={formData.password}
-                  required
-                />
-              </div>
-            </div>
-            <div className="d-flex">
-              <div className="mb-3 col-6">
-                <label className="form-label">Gender</label>
-                <br />
-                <input
-                  type="radio"
-                  className="form-check-input"
-                  value="Male"
-                  name="gender"
-                  onChange={handleChange}
-                  checked={formData.gender === "Male"}
-                />
-                &nbsp; Male &nbsp;
-                <input
-                  type="radio"
-                  className="form-check-input"
-                  value="Female"
-                  name="gender"
-                  onChange={handleChange}
-                  checked={formData.gender === "Female"}
-                />
-                &nbsp; Female
-              </div>
-
-              <div className="mb-3 cnt-set col-6">
-                <label className="form-label">Select City</label>
-                <select
-                  className="form-select"
-                  name="city"
-                  onChange={handleChange}
-                  value={formData.city}
-                  required
-                >
-                  <option value="">Select City</option>
-                  <option value="Surat">Surat</option>
-                  <option value="Rajkot">Rajkot</option>
-                  <option value="Junagadh">Junagadh</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <div className="mb-3">
-                <label className="form-label">Language</label> <br />
-                <div className="d-flex gap-5">
-                  <div>
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value="English"
-                      name="languages"
-                      onChange={handleChange}
-                      checked={formData.languages.includes("English")}
-                    />
-                    &nbsp; English
-                  </div>
-                  <div>
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value="Hindi"
-                      name="languages"
-                      onChange={handleChange}
-                      checked={formData.languages.includes("Hindi")}
-                    />
-                    &nbsp; Hindi
-                  </div>
-                  <div>
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value="Gujrati"
-                      name="languages"
-                      onChange={handleChange}
-                      checked={formData.languages.includes("Gujrati")}
-                    />
-                    &nbsp; Gujrati
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="d-flex gap-3">
-              <div className="mb-3">
-                <label className="form-label">Phone No.</label>
-                <input
-                  type="tel"
-                  className="form-control"
-                  minLength={10}
-                  maxLength={10}
-                  pattern="[0-9]{10}"
-                  name="phone"
-                  onChange={handleChange}
-                  value={formData.phone}
-                  required
-                />
-              </div>
-
-              <div className="mb-3 col-6">
-                <label className="form-label">Age</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  min={1}
-                  max={100}
-                  name="age"
-                  onChange={handleChange}
-                  value={formData.age}
-                  required
-                />
-              </div>
-            </div>
-            <div className="mb-3 mt-3">
-              <button
-                type="submit"
-                className="form-control submit"
-              >
-                Signup
-              </button>
-            </div>
+          <form>
           </form>
+          
+          <div className="mt-5">
+            <h3>Submitted Forms:</h3>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>City</th>
+                  <th>Languages</th>
+                  <th>Phone</th>
+                  <th>Age</th>
+                </tr>
+              </thead>
+              <tbody>
+                {submittedData.map((data, index) => (
+                  <tr key={index}>
+                    <td>{data.firstName}</td>
+                    <td>{data.lastName}</td>
+                    <td>{data.email}</td>
+                    <td>{data.gender}</td>
+                    <td>{data.city}</td>
+                    <td>{data.languages.join(", ")}</td>
+                    <td>{data.phone}</td>
+                    <td>{data.age}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>
   );
 }
 
-export default Signup;
+export default Demo;

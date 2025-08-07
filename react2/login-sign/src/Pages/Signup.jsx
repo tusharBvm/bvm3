@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-// const [list, setList] = useState(() => {
-//     const storeList = localStorage.getItem("list-data");
-//     //  console.log("storelist==>",storeList);
-//     return storeList ? JSON.parse(storeList) : [];
-//   });
-
 function Signup() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
+    confirmPassword: "",
     gender: "",
     city: "",
     languages: [],
@@ -19,13 +14,18 @@ function Signup() {
     age: "",
   });
 
+  const [submittedData, setSubmittedData] = useState([]);
+
   // console.log("formData ==>",formData);
 
-
-  // tare multiple value table ma add thay che
-  // em nai 3-4 data nakh to table ma em
-
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("form-store");
+    if (storedData) {
+      setSubmittedData(JSON.parse(storedData));
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -83,39 +83,69 @@ function Signup() {
       lastName,
       email,
       password,
+      confirmPassword,
       gender,
       city,
       languages,
       phone,
       age,
     } = formData;
-    // console.log(firstName + "," + lastName+ ","+ email + "," + password + "," + gender + "," + city + "," + languages + "," + phone + "," + age );
+
+    // if (password !== confirmPassword) {
+    //     return;
+    // }
+
+    // console.log(
+    //   firstName +
+    //     "," +
+    //     lastName +
+    //     "," +
+    //     email +
+    //     "," +
+    //     password +
+    //     "," +
+    //     confirmPassword +
+    //     "," +
+    //     gender +
+    //     "," +
+    //     city +
+    //     "," +
+    //     languages +
+    //     "," +
+    //     phone +
+    //     "," +
+    //     age
+    // );
 
     if (
       !firstName ||
       !lastName ||
       !email ||
       !password ||
+      !confirmPassword ||
       !gender ||
       !city ||
       languages.length == 0 ||
       !phone ||
-      !age
+      !age ||
+      password !== confirmPassword
     ) {
       let newErrors = validateForm({
         firstName,
         lastName,
         email,
         password,
+        confirmPassword,
         gender,
         city,
         languages,
         phone,
         age,
       });
-
-      // console.log("new errors ==> ", newErrors);
+      //   console.log("new errors ==> ", newErrors);
       setErrors(newErrors);
+
+
       return;
     }
 
@@ -124,6 +154,7 @@ function Signup() {
       lastName,
       email,
       password,
+      confirmPassword,
       gender,
       city,
       languages,
@@ -134,31 +165,29 @@ function Signup() {
     // console.log("new errors ==> ", newErrors);
     setErrors(newErrors);
 
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      gender: "",
-      city: "",
-      languages: [],
-      phone: "",
-      age: "",
-    });
+    if (Object.keys(newErrors).length === 0) {
+      // console.log("submitData ==>",submittedData);
+      const newSubmittedData = [...submittedData, formData];
+      //   console.log("new Submitted data ==>",newSubmittedData);
+      setSubmittedData(newSubmittedData);
+      localStorage.setItem("form-store", JSON.stringify(newSubmittedData));
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        gender: "",
+        city: "",
+        languages: [],
+        phone: "",
+        age: "",
+      });
+    }
 
     console.log("formData ==>", formData);
-
-    localStorage.setItem("form-store", JSON.stringify(formData));
   }
-
-  // useEffect(() => {
-  //   const storedData = localStorage.getItem("form-store");
-  //   console.log("stored data ",storedData);
-
-  //   if (storedData) {
-  //     setFormData(JSON.parse(storedData));
-  //   }
-  // }, []);
 
   const validateForm = (errorData) => {
     // console.log("errorData ==>", errorData);
@@ -184,6 +213,10 @@ function Signup() {
       errors.password = "Password is required";
     } else if (errorData.password.length < 8) {
       errors.password = "Password must be at least 8 characters long";
+    }
+
+    if (!errorData.confirmPassword) {
+      errors.confirmPassword = "ConfirmPassword is required";
     }
 
     if (!errorData.gender) {
@@ -272,6 +305,23 @@ function Signup() {
                 />
                 {errors.password && (
                   <span className="error-message">{errors.password}</span>
+                )}
+              </div>
+            </div>
+            <div>
+              <div className="mb-3">
+                <label className="form-label">ConFirm Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="confirmPassword"
+                  onChange={handleChange}
+                  value={formData.confirmPassword}
+                />
+                {errors.confirmPassword && (
+                  <span className="error-message">
+                    {errors.confirmPassword}
+                  </span>
                 )}
               </div>
             </div>
@@ -415,8 +465,3 @@ function Signup() {
 }
 
 export default Signup;
-
-// issue
-// empty data added on form
-// when submit button click form reset its ook but when empty field form not reset value showing error
-// local storage in store in one data when i enter new data old data remove automatically and mew data store
