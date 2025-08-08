@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -14,11 +15,10 @@ function Signup() {
     age: "",
   });
 
-  const [submittedData, setSubmittedData] = useState([]);
-
   // console.log("formData ==>",formData);
-
+  const [submittedData, setSubmittedData] = useState([]);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate()
 
   useEffect(() => {
     const storedData = localStorage.getItem("form-store");
@@ -144,9 +144,8 @@ function Signup() {
       });
       //   console.log("new errors ==> ", newErrors);
       setErrors(newErrors);
-
-
       return;
+
     }
 
     let newErrors = validateForm({
@@ -186,7 +185,9 @@ function Signup() {
       });
     }
 
-    console.log("formData ==>", formData);
+    navigate('/login')
+
+    // console.log("formData ==>", formData);
   }
 
   const validateForm = (errorData) => {
@@ -217,6 +218,8 @@ function Signup() {
 
     if (!errorData.confirmPassword) {
       errors.confirmPassword = "ConfirmPassword is required";
+    } else if (errorData.password !== errorData.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
     }
 
     if (!errorData.gender) {
