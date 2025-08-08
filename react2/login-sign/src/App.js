@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./Pages/Login";
 import FormData from "./Pages/FormData";
 import NotFound from "./Pages/NotFound";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Assets/form.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Assets/form.css";
 import Signup from "./Pages/Signup";
 
 function App() {

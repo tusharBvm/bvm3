@@ -68,7 +68,6 @@ function Signup() {
     }
 
     // setFormData({ ...formData, [name]: value });
-
     // console.log("[name]==>", [name]);
   };
 
@@ -241,9 +240,10 @@ function Signup() {
     if (!errorData.age) {
       errors.age = "Age Is required";
     }
-
     return errors;
   };
+
+
 
   return (
     <>

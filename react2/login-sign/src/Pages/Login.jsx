@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [loginData, setLoginData] = useState({
@@ -7,16 +8,21 @@ function Login() {
   });
   const [errors, setErrors] = useState({});
   const storedData = localStorage.getItem("form-store");
-  
-  
   const userData = JSON.parse(storedData);
+
+  const getEmail = localStorage.getItem("email-store");
+  console.log("getEmail===>", getEmail);
+
+  const getPass = localStorage.getItem("pass-store");
+  console.log("getPass===>", getPass);
   // console.log("userData==>",userData);
+
+  let navigate = useNavigate();
 
   const handlerChange = (e) => {
     const { name, value } = e.target;
     // console.log("name ==>", name);
     // console.log("value ==>", value);
-
     setLoginData((prev) => ({
       ...prev,
       [name]: value,
@@ -29,8 +35,6 @@ function Login() {
     // console.log(loginData.password)
 
     const { email, password } = loginData;
-
-  
 
     let newErrors = validateForm({
       email,
@@ -46,12 +50,22 @@ function Login() {
           )
         : "No Data Found";
     console.log("userFind ==>", userFind);
-    
-    // console.log("userFind email ==>", userFind[0].email);
-    // console.log("userFind password ==>", userFind[0].password);
+
+    // localStorage.setItem('pass-store',JSON.stringify(userFind))
+    console.log("userFind email ==>", userFind[0]?.email);
+    console.log("userFind password ==>", userFind[0]?.password);
+
+    if (userFind[0]?.email !== undefined) {
+      localStorage.setItem("email-store", userFind[0]?.email);
+    }
+
+    if (userFind[0]?.password !== undefined) {
+      localStorage.setItem("pass-store", userFind[0]?.password);
+    }
+
     //  email !== userFind[0].email
 
-      if (!email || !password  ) {
+    if (!email || !password || email !== getEmail || password !== getPass) {
       let newErrors = validateForm({
         email,
         password,
@@ -61,11 +75,12 @@ function Login() {
       return;
     }
 
-
     setLoginData({
       email: "",
       password: "",
     });
+
+    navigate("/data");
   }
 
   const validateForm = (errorData) => {
@@ -76,12 +91,16 @@ function Login() {
 
     if (!errorData.email.trim()) {
       errors.email = "Email is required";
-    }else if (errorData.email ) {
-      
+    } else if (!/\S+@\S+\.\S+/.test(errorData.email)) {
+      errors.email = "Email is invalid";
+    } else if (errorData.email !== getEmail) {
+      errors.email = "Please Enter Correct Email";
     }
 
     if (!errorData.password.trim()) {
       errors.password = "Password is required";
+    } else if (errorData.password !== getPass) {
+      errors.password = "PassWord Incorrect";
     }
 
     return errors;
@@ -139,3 +158,6 @@ function Login() {
 }
 
 export default Login;
+
+
+// Login Page in Data Set and error And Validation and Form Data page on Showing Data on Table View 
