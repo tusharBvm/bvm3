@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function FormData() {
   let [formData, setFormData] = useState({
@@ -10,12 +10,27 @@ function FormData() {
     phone: "",
     age: "",
   });
-  const [submittedData, setSubmittedData] = useState([]);
+  //  const [list, setList] = useState(() => {
+  //   const storeList = localStorage.getItem("list-data");
+  //   //  console.log("storelist==>",storeList);
+  //   return storeList ? JSON.parse(storeList) : [];
+  // });
+  const [submittedData, setSubmittedData] = useState(() => {
+    const storeData = localStorage.getItem("form-data");
+    // console.log("storeData==>", storeData);
+    return storeData ? JSON.parse(storeData) : [];
+  });
   const [errors, setErrors] = useState({});
   let [editIndex, setEditIndex] = useState(null);
-  // console.log("errors ==>",errors);
+  let [searchTerm, setSearchTerm] = useState("");
+  let [selectTerm, setSelectTerm] = useState("");
 
+  // console.log("errors ==>",errors);
   // console.log("formData ==>",formData);
+
+  useEffect(() => {
+    localStorage.setItem("form-data", JSON.stringify(submittedData));
+  }, [submittedData]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -80,8 +95,11 @@ function FormData() {
         setSubmittedData(newSubmittedData);
       } else {
         let copyData = [...submittedData];
-        console.log("copyData ==>",copyData);
-        console.log( "copyData[editIndex] = formData==.",copyData[editIndex] = formData)
+        // console.log("copyData ==>", copyData);
+        // console.log(
+        //   "copyData[editIndex] = formData==.",
+        //   (copyData[editIndex] = formData)
+        // );
         copyData[editIndex] = formData;
         setSubmittedData(copyData);
         setEditIndex(null);
@@ -118,8 +136,6 @@ function FormData() {
   const validateForm = (errorData) => {
     // console.log("errorData ==>", errorData);
 
-    
-
     const errors = {};
 
     if (!errorData.firstName.trim()) {
@@ -152,6 +168,37 @@ function FormData() {
 
     return errors;
   };
+
+  const searchHandler = (e) => {
+    // console.log("target value =>",e.target.value);
+    setSearchTerm(e.target.value);
+  };
+
+  const selectHandler = (e) => {
+    console.log("select value ==>", e.target.value);
+    setSelectTerm(e.target.value);
+  };
+
+  const filterList = searchTerm
+    ? submittedData.filter(
+        (el) =>
+          // console.log("el==>",el)
+
+          el.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          el.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          el.phone.includes(searchTerm.toLowerCase()) ||
+          el.age.includes(searchTerm.toLowerCase())
+      )
+    : submittedData && selectTerm
+    ? submittedData.filter(
+        (el) =>
+          el.city.toLowerCase().includes(selectTerm.toLowerCase()) ||
+          el.gender.toLowerCase() === selectTerm.toLowerCase() ||
+          el.languages.join().toLowerCase().includes(selectTerm.toLowerCase())
+      )
+    : submittedData;
+  // const filterList = submittedData
+  // console.log("filterList==>", filterList);
 
   return (
     <>
@@ -328,6 +375,64 @@ function FormData() {
 
       <br />
       <br />
+      <div className="mb-3 col-4 mx-5">
+        <label className="form-label">Search Here</label>
+        <input
+          type="text"
+          className="form-control"
+          name="search"
+          onChange={searchHandler}
+        />
+      </div>
+
+      <div className="d-flex gap-3 justify-content-center">
+        <div className="mb-3 cnt-set col-3">
+          <label className="form-label"> City</label>
+          <select
+            className="form-select"
+            name="findCity"
+            onChange={selectHandler}
+          >
+            <option value="">Select City</option>
+            <option value="Surat">Surat</option>
+            <option value="Rajkot">Rajkot</option>
+            <option value="Junagadh">Junagadh</option>
+          </select>
+        </div>
+
+        <div className="mb-3 cnt-set col-3">
+          <label className="form-label">Gender</label>
+
+          <select
+            className="form-select"
+            name="findGender"
+            onChange={selectHandler}
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+
+        <div className="mb-3 cnt-set col-3">
+          <label className="form-label">Languages</label>
+          <select
+            className="form-select"
+            name="findLanguages"
+            onChange={selectHandler}
+          >
+            <option value="">Select Language</option>
+            <option value="English">English</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Gujrati">Gujrati</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <h2>Submiited Data </h2>
+        <hr />
+      </div>
       <table className="table">
         <thead>
           <tr>
@@ -344,7 +449,7 @@ function FormData() {
           </tr>
         </thead>
         <tbody>
-          {submittedData.map((el, index) => (
+          {filterList.map((el, index) => (
             // console.log("el==>",el)
             <tr key={index}>
               <td>{index + 1}</td>
