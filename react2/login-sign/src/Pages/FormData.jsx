@@ -10,11 +10,7 @@ function FormData() {
     phone: "",
     age: "",
   });
-  //  const [list, setList] = useState(() => {
-  //   const storeList = localStorage.getItem("list-data");
-  //   //  console.log("storelist==>",storeList);
-  //   return storeList ? JSON.parse(storeList) : [];
-  // });
+
   const [submittedData, setSubmittedData] = useState(() => {
     const storeData = localStorage.getItem("form-data");
     // console.log("storeData==>", storeData);
@@ -175,7 +171,7 @@ function FormData() {
   };
 
   const selectHandler = (e) => {
-    console.log("select value ==>", e.target.value);
+    // console.log("select value ==>", e.target.value);
     setSelectTerm(e.target.value);
   };
 
