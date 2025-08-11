@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function FormData() {
+function FormData2() {
   let [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -115,23 +115,13 @@ function FormData() {
 
   const deleteHandler = (index) => {
     // console.log(index);
-    let copyData = [...submittedData];
-    // // console.log("copyData ==>",copyData);
-    copyData.splice(index, 1);
-    setSubmittedData(copyData);
+    // let copyData = [...submittedData];
+    // console.log("copyData ==>",copyData);
+    // copyData.splice(index, 1);
+    // setSubmittedData(copyData);
 
-    // filter method using remove Data
-
-    // data ni index return kare
-    // const deleteData = submittedData.filter((_, i) => console.log(i));
-
-    // je index par click kare te data rei bija remove thay jai
-    // const deleteData = submittedData.filter((_, i) => i == index))
-
-    // je index par click kare te data remove and baki na value array return kare
-    // const deleteData = submittedData.filter((_, i) => i !== index);
-    // console.log("deleteData ==>", deleteData);
-    // setSubmittedData(deleteData);
+    // const deleteData = submittedData.filter((_,i) => i !== index)
+    
   };
 
   const edithandler = (index) => {
@@ -497,4 +487,4 @@ function FormData() {
   );
 }
 
-export default FormData;
+export default FormData2;
