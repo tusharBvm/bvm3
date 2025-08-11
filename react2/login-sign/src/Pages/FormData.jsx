@@ -1,73 +1,382 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function FormData() {
+  let [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    gender: "",
+    city: "",
+    languages: [],
+    phone: "",
+    age: "",
+  });
   const [submittedData, setSubmittedData] = useState([]);
+  const [errors, setErrors] = useState({});
+  let [editIndex, setEditIndex] = useState(null);
+  // console.log("errors ==>",errors);
 
-  useEffect(() => {
-    const storedData = localStorage.getItem("form-store");
-    if (storedData) {
-      setSubmittedData(JSON.parse(storedData));
+  // console.log("formData ==>",formData);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    // console.log("name==>", name);
+    // console.log("value==>", value);
+    // console.log("type==>", type);
+    // console.log("checked==>", checked);
+
+    if (type === "checkbox") {
+      if (name === "languages") {
+        setFormData((prev) => {
+          if (checked) {
+            // console.log("prev ==>", prev);
+            // console.log("prev lang ==>",[...prev.languages, value]);
+            return {
+              ...prev,
+              languages: [...prev.languages, value],
+            };
+          } else {
+            // console.log("prev ==>", prev);
+            // console.log("prev lang filter==>", prev.languages.filter((lang) => lang !== value));
+            return {
+              ...prev,
+              languages: prev.languages.filter((lang) => lang !== value),
+            };
+          }
+        });
+      }
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
     }
-  }, []);
+  };
 
-  // console.log("submitted data ==>",submittedData);
+  const submitHandler = (e) => {
+    e.preventDefault();
 
-  function deleteHandler(index) {
+    const { firstName, lastName, gender, city, languages, phone, age } =
+      formData;
+
+    const newErrors = validateForm({
+      firstName,
+      lastName,
+      gender,
+      city,
+      languages,
+      phone,
+      age,
+    });
+
+    // console.log("newErrors ==>", newErrors);
+    setErrors(newErrors);
+
+    // console.log("formData ==>", formData);
+
+    if (Object.keys(newErrors).length === 0) {
+      if (editIndex == null) {
+        const newSubmittedData = [...submittedData, formData];
+        // console.log("newSubmittedData==>", newSubmittedData);
+        setSubmittedData(newSubmittedData);
+      } else {
+        let copyData = [...submittedData];
+        console.log("copyData ==>",copyData);
+        console.log( "copyData[editIndex] = formData==.",copyData[editIndex] = formData)
+        copyData[editIndex] = formData;
+        setSubmittedData(copyData);
+        setEditIndex(null);
+      }
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        gender: "",
+        city: "",
+        languages: [],
+        phone: "",
+        age: "",
+      });
+    }
+  };
+
+  const deleteHandler = (index) => {
     // console.log(index);
     let copyData = [...submittedData];
+    // console.log("copyData ==>",copyData);
     copyData.splice(index, 1);
     setSubmittedData(copyData);
-  }
+  };
+
+  const edithandler = (index) => {
+    // console.log(index);
+    // console.log("submittedData[index] ==>", submittedData[index]);
+    setFormData(submittedData[index]);
+    // console.log("index==>", index);
+    setEditIndex(index);
+  };
+
+  const validateForm = (errorData) => {
+    // console.log("errorData ==>", errorData);
+
+    
+
+    const errors = {};
+
+    if (!errorData.firstName.trim()) {
+      errors.firstName = "First Name is Required";
+    }
+
+    if (!errorData.lastName.trim()) {
+      errors.lastName = "Last Name is Required";
+    }
+
+    if (!errorData.gender) {
+      errors.gender = "Select a Gender";
+    }
+
+    if (!errorData.city) {
+      errors.city = "Select a City";
+    }
+
+    if (errorData.languages.length === 0) {
+      errors.languages = "Select a Language";
+    }
+
+    if (!errorData.phone) {
+      errors.phone = "Phone No. is Required";
+    }
+
+    if (!errorData.age) {
+      errors.age = "Age is Required";
+    }
+
+    return errors;
+  };
 
   return (
     <>
-      <div className="mt-5">
-        <h3>Submitted Forms:</h3>
-        <br />
-        <table className="table">
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Gender</th>
-              <th>City</th>
-              <th>Languages</th>
-              <th>Phone</th>
-              <th>Age</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {submittedData.map((data, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{data.firstName}</td>
-                <td>{data.lastName}</td>
-                <td>{data.email}</td>
-                <td>{data.gender}</td>
-                <td>{data.city}</td>
-                <td>{data.languages.join(", ")}</td>
-                <td>{data.phone}</td>
-                <td>{data.age}</td>
-                <td>
-                  {/* onClick={() => deleteHandler(index)} */}
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => deleteHandler(index)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="main">
+        <div className="sign-cnt">
+          <div>
+            <h2 className="text-center mb-3 ">Form Data</h2>
+          </div>
+          <form>
+            <div className="d-flex gap-3">
+              <div className="mb-3">
+                <label className="form-label">First Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="firstName"
+                  onChange={handleChange}
+                  value={formData.firstName}
+                />
+                {errors.firstName && (
+                  <span className="error-message">{errors.firstName}</span>
+                )}
+              </div>
+
+              <div className="mb-3 ">
+                <label className="form-label">Last Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="lastName"
+                  onChange={handleChange}
+                  value={formData.lastName}
+                />
+                {errors.lastName && (
+                  <span className="error-message">{errors.lastName}</span>
+                )}
+              </div>
+            </div>
+
+            <div className="d-flex ">
+              <div className="mb-3 col-6">
+                <label className="form-label">Gender</label>
+                <br />
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  value="Male"
+                  name="gender"
+                  onChange={handleChange}
+                  checked={formData.gender === "Male"}
+                />
+                &nbsp; Male &nbsp;
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  value="Female"
+                  name="gender"
+                  onChange={handleChange}
+                  checked={formData.gender === "Female"}
+                />
+                &nbsp; Female <br />
+                {errors.gender && (
+                  <span className="error-message">{errors.gender}</span>
+                )}
+              </div>
+
+              <div className="mb-3 cnt-set col-6">
+                <label className="form-label">Select City</label>
+                <select
+                  className="form-select"
+                  name="city"
+                  onChange={handleChange}
+                  value={formData.city}
+                >
+                  <option value="">Select City</option>
+                  <option value="Surat">Surat</option>
+                  <option value="Rajkot">Rajkot</option>
+                  <option value="Junagadh">Junagadh</option>
+                </select>
+                {errors.city && (
+                  <span className="error-message">{errors.city}</span>
+                )}
+              </div>
+            </div>
+            <div>
+              <div className="mb-3">
+                <label className="form-label">Languages</label> <br />
+                <div className="d-flex gap-5">
+                  <div>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value="English"
+                      name="languages"
+                      onChange={handleChange}
+                      checked={formData.languages.includes("English")}
+                    />
+                    &nbsp; English <br />
+                    {errors.languages && (
+                      <span className="error-message">{errors.languages}</span>
+                    )}
+                  </div>
+                  <div>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value="Hindi"
+                      name="languages"
+                      onChange={handleChange}
+                      checked={formData.languages.includes("Hindi")}
+                    />
+                    &nbsp; Hindi <br />
+                  </div>
+                  <div>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value="Gujrati"
+                      name="languages"
+                      onChange={handleChange}
+                      checked={formData.languages.includes("Gujrati")}
+                    />
+                    &nbsp; Gujrati
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="d-flex gap-3">
+              <div className="mb-3 ">
+                <label className="form-label">Phone No.</label>
+                <input
+                  type="tel"
+                  className="form-control"
+                  minLength={10}
+                  maxLength={10}
+                  pattern="[0-9]{10}"
+                  name="phone"
+                  onChange={handleChange}
+                  value={formData.phone}
+                />
+                {errors.phone && (
+                  <span className="error-message">{errors.phone}</span>
+                )}
+              </div>
+
+              <div className="mb-3 col-6">
+                <label className="form-label">Age</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  min={1}
+                  max={100}
+                  name="age"
+                  onChange={handleChange}
+                  value={formData.age}
+                />
+                {errors.age && (
+                  <span className="error-message">{errors.age}</span>
+                )}
+              </div>
+            </div>
+            <div className="mb-3 mt-3">
+              <button
+                type="submit"
+                className="form-control submit"
+                onClick={submitHandler}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
+
+      <br />
+      <br />
+      <table className="table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>City</th>
+            <th>Languages</th>
+            <th>Phone</th>
+            <th>Age</th>
+            <th>Delete</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          {submittedData.map((el, index) => (
+            // console.log("el==>",el)
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{el.firstName}</td>
+              <td>{el.lastName}</td>
+              <td>{el.gender}</td>
+              <td>{el.city}</td>
+              <td>{el.languages.join(",")}</td>
+              <td>{el.phone}</td>
+              <td>{el.age}</td>
+              <td>
+                <button
+                  className="btn btn-success"
+                  onClick={() => deleteHandler(index)}
+                >
+                  Delete
+                </button>
+              </td>
+              <td>
+                <button
+                  className="btn btn-success"
+                  onClick={() => edithandler(index)}
+                >
+                  Update
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
 
 export default FormData;
-
