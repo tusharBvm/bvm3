@@ -80,6 +80,7 @@ function FormData() {
     });
 
     // console.log("newErrors ==>", newErrors);
+
     setErrors(newErrors);
 
     // console.log("formData ==>", formData);
@@ -122,7 +123,7 @@ function FormData() {
 
     // filter method using remove Data
 
-    // data ni index return kare
+    //  data ni index return kare
     // const deleteData = submittedData.filter((_, i) => console.log(i));
 
     // je index par click kare te data rei bija remove thay jai
@@ -382,71 +383,72 @@ function FormData() {
         </div>
       </div>
 
-      <br />
-      <br />
-      <div className="mb-3 col-4 mx-5">
-        <label className="form-label">Search Here</label>
-        <input
-          type="text"
-          className="form-control"
-          name="search"
-          onChange={searchHandler}
-          value={searchTerm}
-        />
-      </div>
-
-      <div className="d-flex gap-3 justify-content-center">
-        <div className="mb-3 cnt-set col-3">
-          <label className="form-label"> City</label>
-          <select
-            className="form-select"
-            name="findCity"
-            onChange={selectHandler}
-            value={selectTerm}
-          >
-            <option value="">Select City</option>
-            <option value="Surat">Surat</option>
-            <option value="Rajkot">Rajkot</option>
-            <option value="Junagadh">Junagadh</option>
-          </select>
+      {/* filter  */}
+      <div className="bg-color p-3">
+        <div className="mb-3 col-4 mx-5">
+          <label className="form-label">Search Here</label>
+          <input
+            type="text"
+            className="form-control"
+            name="search"
+            onChange={searchHandler}
+            value={searchTerm}
+            placeholder="Search Here"
+          />
         </div>
 
-        <div className="mb-3 cnt-set col-3">
-          <label className="form-label">Gender</label>
+        <div className="d-flex gap-3 justify-content-center">
+          <div className="mb-3 cnt-set col-3">
+            <label className="form-label"> City</label>
+            <select
+              className="form-select"
+              name="findCity"
+              onChange={selectHandler}
+              value={selectTerm}
+            >
+              <option value="">Select City</option>
+              <option value="Surat">Surat</option>
+              <option value="Rajkot">Rajkot</option>
+              <option value="Junagadh">Junagadh</option>
+            </select>
+          </div>
 
-          <select
-            className="form-select"
-            name="findGender"
-            onChange={selectHandler}
-            value={selectTerm}
-          >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
+          <div className="mb-3 cnt-set col-3">
+            <label className="form-label">Gender</label>
+
+            <select
+              className="form-select"
+              name="findGender"
+              onChange={selectHandler}
+              value={selectTerm}
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+
+          <div className="mb-3 cnt-set col-3">
+            <label className="form-label">Languages</label>
+            <select
+              className="form-select"
+              name="findLanguages"
+              onChange={selectHandler}
+              value={selectTerm}
+            >
+              <option value="">Select Language</option>
+              <option value="English">English</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Gujrati">Gujrati</option>
+            </select>
+          </div>
         </div>
 
-        <div className="mb-3 cnt-set col-3">
-          <label className="form-label">Languages</label>
-          <select
-            className="form-select"
-            name="findLanguages"
-            onChange={selectHandler}
-            value={selectTerm}
-          >
-            <option value="">Select Language</option>
-            <option value="English">English</option>
-            <option value="Hindi">Hindi</option>
-            <option value="Gujrati">Gujrati</option>
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <h2>Submiited Data </h2>
+        <h2>Submitted Data </h2>
         <hr />
       </div>
-      <table className="table">
+
+      <table className="table table-success table-striped">
         <thead>
           <tr>
             <th>No</th>
@@ -498,3 +500,4 @@ function FormData() {
 }
 
 export default FormData;
+
