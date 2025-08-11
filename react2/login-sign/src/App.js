@@ -7,7 +7,6 @@ import NotFound from "./Pages/NotFound";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Assets/form.css";
 import Signup from "./Pages/Signup";
-import FormData2 from "./Pages/FormData2";
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
         <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/data" element={<FormData />} />
-        <Route path="/data2" element={<FormData2 />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
