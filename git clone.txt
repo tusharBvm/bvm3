@@ -1,0 +1,7 @@
+link copy karrvani - repo ni link
+
+new folder create - cmd open - ena andat comaand type 
+
+git clone https://github.com/tusharBvm/bvm3.git (link paste karvi)
+
+enter
