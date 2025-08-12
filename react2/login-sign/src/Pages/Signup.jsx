@@ -18,7 +18,7 @@ function Signup() {
   // console.log("formData ==>",formData);
   const [submittedData, setSubmittedData] = useState([]);
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedData = localStorage.getItem("form-store");
@@ -144,7 +144,6 @@ function Signup() {
       //   console.log("new errors ==> ", newErrors);
       setErrors(newErrors);
       return;
-
     }
 
     let newErrors = validateForm({
@@ -184,7 +183,8 @@ function Signup() {
       });
     }
 
-    navigate('/login')
+    // setIsAuthenticated(true)
+    navigate("/login");
 
     // console.log("formData ==>", formData);
   }
@@ -242,8 +242,6 @@ function Signup() {
     }
     return errors;
   };
-
-
 
   return (
     <>

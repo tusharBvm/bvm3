@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ setIsAuthenticated }) {
+  
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -11,10 +12,10 @@ function Login() {
   const userData = JSON.parse(storedData);
 
   const getEmail = localStorage.getItem("email-store");
-  console.log("getEmail===>", getEmail);
+  // console.log("getEmail===>", getEmail);
 
   const getPass = localStorage.getItem("pass-store");
-  console.log("getPass===>", getPass);
+  // console.log("getPass===>", getPass);
   // console.log("userData==>",userData);
 
   let navigate = useNavigate();
@@ -52,8 +53,8 @@ function Login() {
     console.log("userFind ==>", userFind);
 
     // localStorage.setItem('pass-store',JSON.stringify(userFind))
-    console.log("userFind email ==>", userFind[0]?.email);
-    console.log("userFind password ==>", userFind[0]?.password);
+    // console.log("userFind email ==>", userFind[0]?.email);
+    // console.log("userFind password ==>", userFind[0]?.password);
 
     if (userFind[0]?.email !== undefined) {
       localStorage.setItem("email-store", userFind[0]?.email);
@@ -80,6 +81,7 @@ function Login() {
       password: "",
     });
 
+    setIsAuthenticated(true);
     navigate("/data");
   }
 
@@ -100,7 +102,7 @@ function Login() {
     if (!errorData.password.trim()) {
       errors.password = "Password is required";
     } else if (errorData.password !== getPass) {
-      errors.password = "PassWord Incorrect";
+      errors.password = "Password Incorrect";
     }
 
     return errors;
@@ -159,5 +161,4 @@ function Login() {
 
 export default Login;
 
-
-// Login Page in Data Set and error And Validation and Form Data page on Showing Data on Table View 
+// Login Page in Data Set and error And Validation and Form Data page on Showing Data on Table View

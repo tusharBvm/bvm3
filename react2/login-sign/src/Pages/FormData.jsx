@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function FormData() {
+function FormData({ setIsAuthenticated }) {
   let [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -112,6 +112,7 @@ function FormData() {
         age: "",
       });
     }
+    setIsAuthenticated(true);
   };
 
   const deleteHandler = (index) => {
@@ -210,6 +211,10 @@ function FormData() {
   // const filterList = submittedData
   // console.log("filterList==>", filterList);
 
+  const logOutHandler = () => {
+    localStorage.clear()
+  };
+
   return (
     <>
       <div className="main">
@@ -218,6 +223,9 @@ function FormData() {
             <h2 className="text-center mb-3 ">Form Data</h2>
           </div>
           <form>
+            <div className="d-flex  justify-content-end mb-3">
+              <button className="btn btn-success" onClick={logOutHandler}>LogOut</button>
+            </div>
             <div className="d-flex gap-3">
               <div className="mb-3">
                 <label className="form-label">First Name</label>
@@ -501,3 +509,5 @@ function FormData() {
 
 export default FormData;
 
+// conditional routing
+// protecting routing
