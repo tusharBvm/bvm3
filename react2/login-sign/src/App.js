@@ -10,14 +10,10 @@ import Signup from "./Pages/Signup";
 import { useEffect, useState } from "react";
 
 function App() {
-  // const [isAuthenticated, setIsAuthenticated] = useState(
-  //   () => JSON.parse(localStorage.getItem("form-store")) || false
-  // );
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // console.log("isAuthenticated ==>",isAuthenticated);
-
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
 
   useEffect(() => {
     const email = localStorage.getItem("email-store");
@@ -27,30 +23,25 @@ function App() {
     }
   }, []);
 
-  // console.log("isAuthenticated ==>",isAuthenticated);
-  
-
   return (
     <>
-      {/* <Routes>
-      setIsAuthenticated = true and navigate
-        <Route path="/" element={isAuthenticated == false ? <Signup/> : <Login/> && isAuthenticated !== false ?  <Login/> : <Signup/> } />
-        <Route path="/login" element={ isAuthenticated == false ? <Signup/> : <Login /> && isAuthenticated !== false ? <Login/> : <Signup/>} />
-        <Route path="/data" element={  isAuthenticated == false ? <Signup/> : <FormData/> && isAuthenticated !== false ? <FormData/> : <Login />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes> */}
-
-      
       <Routes>
         <Route
           path="/"
-          element={<Signup/>}
+          element={isAuthenticated ? (<Navigate to="/data" /> ) : (<Navigate to="/signup" /> ) }
+        />
+        <Route
+          path="/signup"
+          element={ isAuthenticated ? (<Navigate to="/data" />  ) : (<Signup setIsAuthenticated={setIsAuthenticated} />)}
         />
         <Route
           path="/login"
-          element={isAuthenticated ? <Navigate to="/data" /> : <Login setIsAuthenticated={setIsAuthenticated} />}
+           element={ isAuthenticated ? (<Navigate to="/data" /> ) : (<Login setIsAuthenticated={setIsAuthenticated} />)}
         />
-        <Route path="/data" element={isAuthenticated ?  <FormData setIsAuthenticated={setIsAuthenticated} /> :<Navigate to="/login" />} />
+        <Route
+          path="/data"
+          element={ isAuthenticated ? (<FormData setIsAuthenticated={setIsAuthenticated} /> ) : (<Navigate to="/login" />)}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
@@ -58,3 +49,6 @@ function App() {
 }
 
 export default App;
+
+
+

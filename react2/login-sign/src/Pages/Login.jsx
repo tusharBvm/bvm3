@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login({ setIsAuthenticated }) {
-  
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -152,6 +151,9 @@ function Login({ setIsAuthenticated }) {
                 Login
               </button>
             </div>
+             <div className="text-center">
+              Don't have an account ? <Link style={{textDecoration:'none'}} to="/signup">SignUp Now</Link>
+            </div>
           </form>
         </div>
       </div>
@@ -160,5 +162,3 @@ function Login({ setIsAuthenticated }) {
 }
 
 export default Login;
-
-// Login Page in Data Set and error And Validation and Form Data page on Showing Data on Table View

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function FormData({ setIsAuthenticated }) {
   let [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ function FormData({ setIsAuthenticated }) {
   let [editIndex, setEditIndex] = useState(null);
   let [searchTerm, setSearchTerm] = useState("");
   let [selectTerm, setSelectTerm] = useState("");
+  let navigate = useNavigate()
 
   // console.log("errors ==>",errors);
   // console.log("formData ==>",formData);
@@ -112,7 +114,6 @@ function FormData({ setIsAuthenticated }) {
         age: "",
       });
     }
-    setIsAuthenticated(true);
   };
 
   const deleteHandler = (index) => {
@@ -212,7 +213,10 @@ function FormData({ setIsAuthenticated }) {
   // console.log("filterList==>", filterList);
 
   const logOutHandler = () => {
-    localStorage.clear()
+    localStorage.removeItem('email-store')
+    localStorage.removeItem('pass-store')
+    setIsAuthenticated(false)
+    navigate('/login')
   };
 
   return (
@@ -511,3 +515,7 @@ export default FormData;
 
 // conditional routing
 // protecting routing
+
+
+// common componnets for input fields and button
+// protected routing

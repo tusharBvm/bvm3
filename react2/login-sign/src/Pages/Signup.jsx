@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -458,7 +458,11 @@ function Signup() {
                 Signup
               </button>
             </div>
+            <div className="text-center">
+              Already have an account ? <Link style={{textDecoration:'none'}} to="/login">Login Now</Link>
+            </div>
           </form>
+          
         </div>
       </div>
     </>
