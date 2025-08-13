@@ -152,7 +152,8 @@ function Login({ setIsAuthenticated }) {
               </button>
             </div>
              <div className="text-center">
-              Don't have an account ? <Link style={{textDecoration:'none'}} to="/signup">SignUp Now</Link>
+              {/* Don't have an account ? <Link style={{textDecoration:'none'}} to="/signup">SignUp Now</Link> */}
+              Don't have an account ? <Link style={{textDecoration:'none'}} to="/">SignUp Now</Link>
             </div>
           </form>
         </div>

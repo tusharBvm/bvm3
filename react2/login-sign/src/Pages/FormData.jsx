@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function FormData({ setIsAuthenticated }) {
+function FormData({ isAuthenticated ,setIsAuthenticated}) {
   let [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,7 +21,7 @@ function FormData({ setIsAuthenticated }) {
   let [editIndex, setEditIndex] = useState(null);
   let [searchTerm, setSearchTerm] = useState("");
   let [selectTerm, setSelectTerm] = useState("");
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   // console.log("errors ==>",errors);
   // console.log("formData ==>",formData);
@@ -212,11 +212,20 @@ function FormData({ setIsAuthenticated }) {
   // const filterList = submittedData
   // console.log("filterList==>", filterList);
 
+  // if (isAuthenticated == true) {
+  //   navigate("/data");
+  // }else{
+  //   navigate("/login");
+  // }
+  useEffect(() => {
+    navigate("/data");
+  }, [isAuthenticated]);
+
   const logOutHandler = () => {
-    localStorage.removeItem('email-store')
-    localStorage.removeItem('pass-store')
+    localStorage.removeItem("email-store");
+    localStorage.removeItem("pass-store");
     setIsAuthenticated(false)
-    navigate('/login')
+    navigate("/login");
   };
 
   return (
@@ -228,7 +237,9 @@ function FormData({ setIsAuthenticated }) {
           </div>
           <form>
             <div className="d-flex  justify-content-end mb-3">
-              <button className="btn btn-success" onClick={logOutHandler}>LogOut</button>
+              <button className="btn btn-success" onClick={logOutHandler}>
+                LogOut
+              </button>
             </div>
             <div className="d-flex gap-3">
               <div className="mb-3">
@@ -515,7 +526,6 @@ export default FormData;
 
 // conditional routing
 // protecting routing
-
 
 // common componnets for input fields and button
 // protected routing
