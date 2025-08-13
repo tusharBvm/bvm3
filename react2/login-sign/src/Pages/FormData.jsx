@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Input from "../Components/Input";
 
-function FormData({ isAuthenticated ,setIsAuthenticated}) {
+function FormData({ isAuthenticated, setIsAuthenticated }) {
   let [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -224,7 +225,7 @@ function FormData({ isAuthenticated ,setIsAuthenticated}) {
   const logOutHandler = () => {
     localStorage.removeItem("email-store");
     localStorage.removeItem("pass-store");
-    setIsAuthenticated(false)
+    setIsAuthenticated(false);
     navigate("/login");
   };
 
@@ -244,7 +245,14 @@ function FormData({ isAuthenticated ,setIsAuthenticated}) {
             <div className="d-flex gap-3">
               <div className="mb-3">
                 <label className="form-label">First Name</label>
-                <input
+                {/* <input
+                  type="text"
+                  className="form-control"
+                  name="firstName"
+                  onChange={handleChange}
+                  value={formData.firstName}
+                /> */}
+                <Input
                   type="text"
                   className="form-control"
                   name="firstName"
@@ -258,7 +266,14 @@ function FormData({ isAuthenticated ,setIsAuthenticated}) {
 
               <div className="mb-3 ">
                 <label className="form-label">Last Name</label>
-                <input
+                {/* <input
+                  type="text"
+                  className="form-control"
+                  name="lastName"
+                  onChange={handleChange}
+                  value={formData.lastName}
+                /> */}
+                <Input
                   type="text"
                   className="form-control"
                   name="lastName"
@@ -275,7 +290,15 @@ function FormData({ isAuthenticated ,setIsAuthenticated}) {
               <div className="mb-3 col-6">
                 <label className="form-label">Gender</label>
                 <br />
-                <input
+                {/* <input
+                  type="radio"
+                  className="form-check-input"
+                  value="Male"
+                  name="gender"
+                  onChange={handleChange}
+                  checked={formData.gender === "Male"}
+                /> */}
+                <Input
                   type="radio"
                   className="form-check-input"
                   value="Male"
@@ -284,7 +307,15 @@ function FormData({ isAuthenticated ,setIsAuthenticated}) {
                   checked={formData.gender === "Male"}
                 />
                 &nbsp; Male &nbsp;
-                <input
+                {/* <input
+                  type="radio"
+                  className="form-check-input"
+                  value="Female"
+                  name="gender"
+                  onChange={handleChange}
+                  checked={formData.gender === "Female"}
+                /> */}
+                <Input
                   type="radio"
                   className="form-check-input"
                   value="Female"

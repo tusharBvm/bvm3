@@ -52,7 +52,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 
 // export default App;
 
-///  ================>  protecting routing  <<================  //
+///  ================>  protecting routing with conditinal Routing  <<================  //
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -68,7 +68,6 @@ function App() {
   return (
     <>
   
-
       {/* <Routes>
         <Route path="/"  element={isAuthenticated ? (<Navigate to="/data" /> ) : (<Navigate to="/signup" /> ) } />
         <Route path="/signup"  element={ isAuthenticated ? (<Navigate to="/data" />  ) : (<Signup setIsAuthenticated={setIsAuthenticated} />)} />
@@ -87,7 +86,7 @@ function App() {
         />
       </Routes> */}
 
-      {/* <Routes>
+      <Routes>
         <Route path="/"  element={ isAuthenticated ? (<Navigate to="/data" />) : (<Signup setIsAuthenticated={setIsAuthenticated} />)} />
         <Route
           path="/login"
@@ -101,23 +100,9 @@ function App() {
             </ProtectedRoute>
           }
         />
-      </Routes> */}
-
-       <Routes>
-        <Route path="/"  element={<Signup setIsAuthenticated={setIsAuthenticated} />} />
-        <Route
-          path="/login"
-           element={ <Login setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/data"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <FormData setIsAuthenticated={setIsAuthenticated} />
-            </ProtectedRoute>
-          }
-        />
+          <Route path="*" element={<NotFound />} />
       </Routes>
+         
     </>
   );
 }

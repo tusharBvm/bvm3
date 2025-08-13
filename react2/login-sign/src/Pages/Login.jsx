@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Input from "../Components/Input";
 
 function Login({ setIsAuthenticated }) {
   const [loginData, setLoginData] = useState({
@@ -116,10 +117,17 @@ function Login({ setIsAuthenticated }) {
           <form>
             <div className="mb-3 col-12">
               <label className="form-label">Email</label>
-              <input
+              {/* <input
                 type="email"
                 name="email"
                 className="form-control"
+                onChange={handlerChange}
+                value={loginData.email}
+              /> */}
+              <Input
+                type="email"
+                className="form-control"
+                name="email"
                 onChange={handlerChange}
                 value={loginData.email}
               />
@@ -130,10 +138,17 @@ function Login({ setIsAuthenticated }) {
 
             <div className="mb-3 mt-5 col-12">
               <label className="form-label">Password</label>
-              <input
+              {/* <input
                 type="password"
                 name="password"
                 className="form-control"
+                onChange={handlerChange}
+                value={loginData.password}
+              /> */}
+              <Input
+                type="password"
+                className="form-control"
+                name="password"
                 onChange={handlerChange}
                 value={loginData.password}
               />
@@ -151,9 +166,12 @@ function Login({ setIsAuthenticated }) {
                 Login
               </button>
             </div>
-             <div className="text-center">
+            <div className="text-center">
               {/* Don't have an account ? <Link style={{textDecoration:'none'}} to="/signup">SignUp Now</Link> */}
-              Don't have an account ? <Link style={{textDecoration:'none'}} to="/">SignUp Now</Link>
+              Don't have an account ?{" "}
+              <Link style={{ textDecoration: "none" }} to="/">
+                SignUp Now
+              </Link>
             </div>
           </form>
         </div>

@@ -1,0 +1,18 @@
+bvm intership folder open
+
+
+second time push data 
+git add .
+git commit -m "newwwww" 
+git push
+
+// git clone create karva 
+
+link copy karrvani - repo ni link
+
+new folder create - cmd open - ena andar command type 
+
+git clone https://github.com/tusharBvm/bvm3.git (link paste karvi)
+
+enter
+

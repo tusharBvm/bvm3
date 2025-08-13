@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "../Components/Button";
+import Input from "../Components/Input";
+import Select from "../Components/Select";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -18,6 +21,12 @@ function Signup() {
   // console.log("formData ==>",formData);
   const [submittedData, setSubmittedData] = useState([]);
   const [errors, setErrors] = useState({});
+  const options = [
+    // { value: "" },
+    { value: "Surat" },
+    { value: "Rajkot" },
+    { value: "Junagadh" },
+  ];
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -254,7 +263,15 @@ function Signup() {
             <div className="d-flex gap-3">
               <div className="mb-3">
                 <label className="form-label">First Name</label>
-                <input
+                {/* <input
+                  type="text"
+                  className="form-control"
+                  name="firstName"
+                  onChange={handleChange}
+                  value={formData.firstName}
+                
+                /> */}
+                <Input
                   type="text"
                   className="form-control"
                   name="firstName"
@@ -268,7 +285,14 @@ function Signup() {
 
               <div className="mb-3 ">
                 <label className="form-label">Last Name</label>
-                <input
+                {/* <input
+                  type="text"
+                  className="form-control"
+                  name="lastName"
+                  onChange={handleChange}
+                  value={formData.lastName}
+                /> */}
+                <Input
                   type="text"
                   className="form-control"
                   name="lastName"
@@ -283,7 +307,14 @@ function Signup() {
             <div className="d-flex gap-3">
               <div className="mb-3">
                 <label className="form-label">Email</label>
-                <input
+                {/* <input
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  onChange={handleChange}
+                  value={formData.email}
+                /> */}
+                <Input
                   type="email"
                   className="form-control"
                   name="email"
@@ -297,7 +328,14 @@ function Signup() {
 
               <div className="mb-3">
                 <label className="form-label">Password</label>
-                <input
+                {/* <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  onChange={handleChange}
+                  value={formData.password}
+                /> */}
+                <Input
                   type="password"
                   className="form-control"
                   name="password"
@@ -312,7 +350,14 @@ function Signup() {
             <div>
               <div className="mb-3">
                 <label className="form-label">ConFirm Password</label>
-                <input
+                {/* <input
+                  type="password"
+                  className="form-control"
+                  name="confirmPassword"
+                  onChange={handleChange}
+                  value={formData.confirmPassword}
+                /> */}
+                <Input
                   type="password"
                   className="form-control"
                   name="confirmPassword"
@@ -330,7 +375,15 @@ function Signup() {
               <div className="mb-3 col-6">
                 <label className="form-label">Gender</label>
                 <br />
-                <input
+                {/* <input
+                  type="radio"
+                  className="form-check-input"
+                  value="Male"
+                  name="gender"
+                  onChange={handleChange}
+                  checked={formData.gender === "Male"}
+                /> */}
+                <Input
                   type="radio"
                   className="form-check-input"
                   value="Male"
@@ -339,7 +392,15 @@ function Signup() {
                   checked={formData.gender === "Male"}
                 />
                 &nbsp; Male &nbsp;
-                <input
+                {/* <input
+                  type="radio"
+                  className="form-check-input"
+                  value="Female"
+                  name="gender"
+                  onChange={handleChange}
+                  checked={formData.gender === "Female"}
+                /> */}
+                <Input
                   type="radio"
                   className="form-check-input"
                   value="Female"
@@ -355,7 +416,7 @@ function Signup() {
 
               <div className="mb-3 cnt-set col-6">
                 <label className="form-label">Select City</label>
-                <select
+                {/* <select
                   className="form-select"
                   name="city"
                   onChange={handleChange}
@@ -365,7 +426,15 @@ function Signup() {
                   <option value="Surat">Surat</option>
                   <option value="Rajkot">Rajkot</option>
                   <option value="Junagadh">Junagadh</option>
-                </select>
+                </select> */}
+                <Select
+                  className="form-select"
+                  name="city"
+                  onChange={handleChange}
+                  value={formData.city}
+                  options={options}
+                />
+
                 {errors.city && (
                   <span className="error-message">{errors.city}</span>
                 )}
@@ -376,9 +445,17 @@ function Signup() {
                 <label className="form-label">Language</label> <br />
                 <div className="d-flex gap-5">
                   <div>
-                    <input
+                    {/* <input
                       className="form-check-input"
                       type="checkbox"
+                      value="English"
+                      name="languages"
+                      onChange={handleChange}
+                      checked={formData.languages.includes("English")}
+                    /> */}
+                    <Input
+                      type="checkbox"
+                      className="form-check-input"
                       value="English"
                       name="languages"
                       onChange={handleChange}
@@ -390,9 +467,17 @@ function Signup() {
                     )}
                   </div>
                   <div>
-                    <input
+                    {/* <input
                       className="form-check-input"
                       type="checkbox"
+                      value="Hindi"
+                      name="languages"
+                      onChange={handleChange}
+                      checked={formData.languages.includes("Hindi")}
+                    /> */}
+                    <Input
+                      type="checkbox"
+                      className="form-check-input"
                       value="Hindi"
                       name="languages"
                       onChange={handleChange}
@@ -401,9 +486,17 @@ function Signup() {
                     &nbsp; Hindi
                   </div>
                   <div>
-                    <input
+                    {/* <input
                       className="form-check-input"
                       type="checkbox"
+                      value="Gujrati"
+                      name="languages"
+                      onChange={handleChange}
+                      checked={formData.languages.includes("Gujrati")}
+                    /> */}
+                    <Input
+                      type="checkbox"
+                      className="form-check-input"
                       value="Gujrati"
                       name="languages"
                       onChange={handleChange}
@@ -417,7 +510,7 @@ function Signup() {
             <div className="d-flex gap-3">
               <div className="mb-3 ">
                 <label className="form-label">Phone No.</label>
-                <input
+                {/* <input
                   type="tel"
                   className="form-control"
                   minLength={10}
@@ -426,7 +519,18 @@ function Signup() {
                   name="phone"
                   onChange={handleChange}
                   value={formData.phone}
+                /> */}
+                <Input
+                  type="tel"
+                  className="form-control"
+                  minLength={10}
+                  maxLength={10}
+                  pattern="[0-9]{10}"
+                  value={formData.phone}
+                  name="phone"
+                  onChange={handleChange}
                 />
+
                 {errors.phone && (
                   <span className="error-message">{errors.phone}</span>
                 )}
@@ -434,14 +538,22 @@ function Signup() {
 
               <div className="mb-3 col-6">
                 <label className="form-label">Age</label>
-                <input
+                {/* <input
                   type="number"
                   className="form-control"
                   min={1}
                   max={100}
                   name="age"
                   value={formData.age}
-                  required
+                  onChange={handleChange}
+                /> */}
+                <Input
+                  type="number"
+                  className="form-control"
+                  min={1}
+                  max={100}
+                  value={formData.age}
+                  name="age"
                   onChange={handleChange}
                 />
                 {errors.age && (
@@ -459,12 +571,30 @@ function Signup() {
               </button>
             </div>
             <div className="text-center">
-              Already have an account ? <Link style={{textDecoration:'none'}} to="/login">Login Now</Link>
+              Already have an account ?{" "}
+              <Link style={{ textDecoration: "none" }} to="/login">
+                Login Now
+              </Link>
             </div>
           </form>
-          
         </div>
       </div>
+
+      {/* example of reuseable components  */}
+      {/* <div>
+        <Button value={"click"} backgroundColor={"red"}/>
+        <Button value={'demo'} backgroundColor={'blue'} color={'white'} />
+
+         <Button value={"click"} style={{color:'red',backgroundColor:'blue',padding:"20px",borderRadius:"10px"}}/>
+        <Button value={"demo"} style={{color:'green',backgroundColor:'yellow',padding:"20px",borderRadius:"10px"}}/>
+
+      </div>
+      <br />
+                        
+      <div>
+        <Input type="password" className="form-control" />
+      </div> */}
+      {/* example of reuseable components  */}
     </>
   );
 }

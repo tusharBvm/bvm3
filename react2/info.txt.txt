@@ -1,0 +1,44 @@
+ // React Reuseble Components //
+
+(1) Create Folder Common-Components.in added new Components file name . like button, input etc... and value passing from pros
+
+import React from "react";
+
+Example 1 : ===>
+function Button({ backgroundColor, value, color }) {
+  return (
+    <>
+      <button style={{ backgroundColor, color}}>{value}</button>
+    </>
+  );
+}
+
+export default Button;
+import React from "react";
+
+function Input({ type, className, name, onChange, value }) {
+  return (
+    <>
+      <input
+        type={type}
+        className={className}
+        name={name}
+        onChange={onChange}
+        value={value}
+      />
+    </>
+  );
+}
+
+export default Input;
+
+
+(2) when use it import and use with all values your require type use ..
+
+ <Button value={"click"} backgroundColor={"red"}/>
+ <Button value={'demo'} backgroundColor={'blue'} color={'white'} />
+
+ <Input type="text" className="form-control"  name="firstName"  onChange={handleChange} value={formData.firstName}/>
+
+
+
