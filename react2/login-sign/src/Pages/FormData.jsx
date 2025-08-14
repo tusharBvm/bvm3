@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../Components/Input";
+import Select from "../Components/Select";
 
 function FormData({ isAuthenticated, setIsAuthenticated }) {
   let [formData, setFormData] = useState({
@@ -23,6 +24,25 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
   let [searchTerm, setSearchTerm] = useState("");
   let [selectTerm, setSelectTerm] = useState("");
   let navigate = useNavigate();
+  const options = [
+    // { value: "" },
+    { value: "Surat" },
+    { value: "Rajkot" },
+    { value: "Junagadh" },
+  ];
+
+  const genderOptions = [
+    // { value: "" },
+    { value: "Male" },
+    { value: "Female" },
+  ];
+
+  const languagesOptions = [
+    // { value: "" },
+    { value: "English" },
+    { value: "Hindi" },
+    { value: "Gujrati" },
+  ];
 
   // console.log("errors ==>",errors);
   // console.log("formData ==>",formData);
@@ -331,7 +351,7 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
 
               <div className="mb-3 cnt-set col-6">
                 <label className="form-label">Select City</label>
-                <select
+                {/* <select
                   className="form-select"
                   name="city"
                   onChange={handleChange}
@@ -341,7 +361,14 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
                   <option value="Surat">Surat</option>
                   <option value="Rajkot">Rajkot</option>
                   <option value="Junagadh">Junagadh</option>
-                </select>
+                </select> */}
+                <Select
+                  className="form-select"
+                  name="city"
+                  onChange={handleChange}
+                  value={formData.city}
+                  options={options}
+                />
                 {errors.city && (
                   <span className="error-message">{errors.city}</span>
                 )}
@@ -352,9 +379,17 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
                 <label className="form-label">Languages</label> <br />
                 <div className="d-flex gap-5">
                   <div>
-                    <input
+                    {/* <input
                       className="form-check-input"
                       type="checkbox"
+                      value="English"
+                      name="languages"
+                      onChange={handleChange}
+                      checked={formData.languages.includes("English")}
+                    /> */}
+                    <Input
+                      type="checkbox"
+                      className="form-check-input"
                       value="English"
                       name="languages"
                       onChange={handleChange}
@@ -366,9 +401,17 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
                     )}
                   </div>
                   <div>
-                    <input
+                    {/* <input
                       className="form-check-input"
                       type="checkbox"
+                      value="Hindi"
+                      name="languages"
+                      onChange={handleChange}
+                      checked={formData.languages.includes("Hindi")}
+                    /> */}
+                    <Input
+                      type="checkbox"
+                      className="form-check-input"
                       value="Hindi"
                       name="languages"
                       onChange={handleChange}
@@ -377,9 +420,17 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
                     &nbsp; Hindi <br />
                   </div>
                   <div>
-                    <input
+                    {/* <input
                       className="form-check-input"
                       type="checkbox"
+                      value="Gujrati"
+                      name="languages"
+                      onChange={handleChange}
+                      checked={formData.languages.includes("Gujrati")}
+                    /> */}
+                    <Input
+                      type="checkbox"
+                      className="form-check-input"
                       value="Gujrati"
                       name="languages"
                       onChange={handleChange}
@@ -393,7 +444,17 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
             <div className="d-flex gap-3">
               <div className="mb-3 ">
                 <label className="form-label">Phone No.</label>
-                <input
+                {/* <input
+                  type="tel"
+                  className="form-control"
+                  minLength={10}
+                  maxLength={10}
+                  pattern="[0-9]{10}"
+                  name="phone"
+                  onChange={handleChange}
+                  value={formData.phone}
+                /> */}
+                <Input
                   type="tel"
                   className="form-control"
                   minLength={10}
@@ -410,7 +471,16 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
 
               <div className="mb-3 col-6">
                 <label className="form-label">Age</label>
-                <input
+                {/* <input
+                  type="number"
+                  className="form-control"
+                  min={1}
+                  max={100}
+                  name="age"
+                  onChange={handleChange} 
+                  value={formData.age}
+                /> */}
+                <Input
                   type="number"
                   className="form-control"
                   min={1}
@@ -441,7 +511,15 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
       <div className="bg-color p-3">
         <div className="mb-3 col-4 mx-5">
           <label className="form-label">Search Here</label>
-          <input
+          {/* <input
+            type="text"
+            className="form-control"
+            name="search"
+            onChange={searchHandler}
+            value={searchTerm}
+            placeholder="Search Here"
+          /> */}
+          <Input
             type="text"
             className="form-control"
             name="search"
@@ -454,7 +532,7 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
         <div className="d-flex gap-3 justify-content-center">
           <div className="mb-3 cnt-set col-3">
             <label className="form-label"> City</label>
-            <select
+            {/* <select
               className="form-select"
               name="findCity"
               onChange={selectHandler}
@@ -464,13 +542,20 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
               <option value="Surat">Surat</option>
               <option value="Rajkot">Rajkot</option>
               <option value="Junagadh">Junagadh</option>
-            </select>
+            </select> */}
+            <Select
+              className="form-select"
+              name="findCity"
+              onChange={selectHandler}
+              value={selectTerm}
+              options={options}
+            />
           </div>
 
           <div className="mb-3 cnt-set col-3">
             <label className="form-label">Gender</label>
 
-            <select
+            {/* <select
               className="form-select"
               name="findGender"
               onChange={selectHandler}
@@ -479,12 +564,19 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
-            </select>
+            </select> */}
+            <Select
+              className="form-select"
+              name="findGender"
+              onChange={selectHandler}
+              value={selectTerm}
+              options={genderOptions}
+            />
           </div>
 
           <div className="mb-3 cnt-set col-3">
             <label className="form-label">Languages</label>
-            <select
+            {/* <select
               className="form-select"
               name="findLanguages"
               onChange={selectHandler}
@@ -494,7 +586,14 @@ function FormData({ isAuthenticated, setIsAuthenticated }) {
               <option value="English">English</option>
               <option value="Hindi">Hindi</option>
               <option value="Gujrati">Gujrati</option>
-            </select>
+            </select> */}
+            <Select
+              className="form-select"
+              name="findLanguages"
+              onChange={selectHandler}
+              value={selectTerm}
+              options={languagesOptions}
+            />
           </div>
         </div>
 

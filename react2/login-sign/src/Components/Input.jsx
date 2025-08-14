@@ -1,6 +1,6 @@
 import React from "react";
 
-function Input({ type, className, name, onChange, value,checked,pattern,minLength,maxLength,min,max}) {
+function Input({ type, className, name, onChange, value,checked,pattern,minLength,maxLength,min,max,placeholder}) {
   return (
     <>
       <input
@@ -15,6 +15,7 @@ function Input({ type, className, name, onChange, value,checked,pattern,minLengt
         maxLength={maxLength}
         min={min}
         max={max}
+        placeholder={placeholder}
 
       />
     </>

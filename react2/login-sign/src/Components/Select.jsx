@@ -1,6 +1,14 @@
 import React from "react";
 
-const Select = ({ options, className, name, onChange, value }) => {
+const Select = ({
+  languagesOptions,
+  genderOptions,
+  options,
+  className,
+  name,
+  onChange,
+  value,
+}) => {
   return (
     <>
       <select
@@ -9,17 +17,41 @@ const Select = ({ options, className, name, onChange, value }) => {
         onChange={onChange}
         value={value}
       >
-        <option value="">Select An Option</option>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.value}
-          </option>
-        // console.log("options==>",options)
-        ))}
+        <option value="">Select All</option>
+        {
+          // options ?
+          options?.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.value}
+            </option>
+            // console.log("options==>",options)
+          ))
+
+          //  ====>  hard way   <==
+
+          // : ''
+          // ||  genderOptions ? genderOptions.map((option)=>(
+          //   // console.log("genderOptions==>",genderOptions)
+          //   // console.log("option==>",option)
+          //    <option key={option.value} value={option.value}>
+          //     {option.value}
+          //   </option>
+          // )) : ''
+          // || languagesOptions ? languagesOptions.map((option) =>(
+          //   // console.log("languagesOptions==>",languagesOptions)
+          //   // console.log("option==>",option)
+          //        <option key={option.value} value={option.value}>
+          //     {option.value}
+          //   </option>
+          // )) : ''
+        }
       </select>
     </>
   );
 };
 
 export default Select;
+
+
+
 

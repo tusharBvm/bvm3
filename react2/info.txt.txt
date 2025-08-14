@@ -14,6 +14,8 @@ function Button({ backgroundColor, value, color }) {
 }
 
 export default Button;
+
+Exampple 2 : ===>
 import React from "react";
 
 function Input({ type, className, name, onChange, value }) {
@@ -39,6 +41,61 @@ export default Input;
  <Button value={'demo'} backgroundColor={'blue'} color={'white'} />
 
  <Input type="text" className="form-control"  name="firstName"  onChange={handleChange} value={formData.firstName}/>
+
+Example 3 : ========> Select & options common components 
+
+import React from "react";
+
+const Select = ({
+  options,
+  className,
+  name,
+  onChange,
+  value,
+}) => {
+  return (
+    <>
+      <select
+        className={className}
+        name={name}
+        onChange={onChange}
+        value={value}
+      >
+        <option value="">Select All</option>
+        {
+          // options ?
+          options?.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.value}
+            </option>
+            // console.log("options==>",options)
+          ))
+        }
+      </select>
+    </>
+  );
+};
+
+export default Select;
+
+je page ma use karvu hoi tya 
+
+const options = [
+    // { value: "" },
+    { value: "Surat" },
+    { value: "Rajkot" },
+    { value: "Junagadh" },
+  ];
+
+// Html File
+ <Select
+        className="form-select"
+        name="findCity"
+        onChange={selectHandler}
+        value={selectTerm}
+        options={options}
+ />
+
 
 
 
