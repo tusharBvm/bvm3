@@ -1,0 +1,17 @@
+.main-cnt{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: grey;
+}
+
+.form-cnt{
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.age-width{
+    width: 200px;
+}
