@@ -15,3 +15,8 @@
 .age-width{
     width: 200px;
 }
+
+.error-message{
+color: red;
+font-size: 14px;
+}

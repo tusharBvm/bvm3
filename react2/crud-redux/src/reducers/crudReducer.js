@@ -11,7 +11,6 @@ const crudReducer = (state = initialState, action) => {
     case ADD_USER:
       // console.log("state ==>",state)
       // console.log("action payload ==>",action.payload)
-  
       return {
         ...state,
         users: [...state.users, action.payload],
@@ -22,12 +21,12 @@ const crudReducer = (state = initialState, action) => {
         users: state.users.filter((_, index) => index !== action.payload),
       };
     case UPDATE_USER:
+      const { index, user } = action.payload;
+      const updatedUsers = [...state.users];
+      updatedUsers[index] = user;
       return {
         ...state,
-        users: state.users.map((user) =>
-          // console.log(user)
-          user.index === action.payload.index ? action.payload : user
-        ),
+        users: updatedUsers,
       };
     default:
       return state;

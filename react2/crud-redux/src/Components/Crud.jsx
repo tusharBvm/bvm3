@@ -21,7 +21,10 @@ const Crud = () => {
   };
   const [formData, setFormData] = useState(form);
   // console.log("formData==>", formData);
-  const [edit, setEdit] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectTerm, setSelectTerm] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,21 +56,46 @@ const Crud = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const { firstName, lastName } = formData;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      gender,
+      city,
+      languages,
+      age,
+      phone,
+    } = formData;
     // console.log("firstName==>",firstName);
     // console.log("lastName==>",lastName);
 
     // console.log("formData==>",formData);
-    
 
-    if (edit) {
-      dispatch(updateUser(formData))
-    } else {
-      dispatch(addUser({ ...formData }));
+    const newErrors = validateForm({
+      firstName,
+      lastName,
+      email,
+      password,
+      gender,
+      city,
+      languages,
+      age,
+      phone,
+    });
+    // console.log("newErrors==>", newErrors);
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      if (editIndex !== null) {
+        dispatch(updateUser(editIndex, formData));
+        setFormData(form);
+        setEditIndex(null);
+      } else {
+        dispatch(addUser({ ...formData }));
+        setFormData(form);
+      }
     }
-    setFormData(form);
-    setEdit(false);
-
   };
 
   const DeleteHandler = (index) => {
@@ -75,12 +103,95 @@ const Crud = () => {
     dispatch(deleteUser(index));
   };
 
-  const UpdateHandler = (user) => {
+  const UpdateHandler = (user, index) => {
     // console.log("user==>", user);
     setFormData(user);
-    setEdit(true);
-
+    setEditIndex(index);
   };
+
+  const validateForm = (errorData) => {
+    // console.log("errorData===>", errorData);
+
+    const errors = {};
+
+    if (!errorData.firstName.trim()) {
+      errors.firstName = "First Name is Required";
+    }
+
+    if (!errorData.lastName.trim()) {
+      errors.lastName = "Last Name is Required";
+    }
+
+    if (!errorData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(errorData.email)) {
+      errors.email = "Email is invalid";
+    }
+
+    if (!errorData.password.trim()) {
+      errors.password = "Password is Required";
+    }
+
+    if (!errorData.gender) {
+      errors.gender = "Select a Gender";
+    }
+
+    if (!errorData.gender) {
+      errors.gender = "Select a Gender";
+    }
+
+    if (!errorData.city) {
+      errors.city = "Select a City";
+    }
+
+    if (errorData.languages.length == 0) {
+      errors.languages = "Select Languages";
+    }
+
+    if (!errorData.age) {
+      errors.age = "Age is Required";
+    }
+
+    if (!errorData.phone) {
+      errors.phone = "Phone is Required";
+    }
+
+    return errors;
+  };
+
+  const searchHandler = (e) => {
+    // console.log(e.target.value);
+    setSearchTerm(e.target.value);
+  };
+
+  const selectHandler = (e) => {
+    // console.log(e.target.value);
+    setSelectTerm(e.target.value);
+  };
+
+  const filterList = searchTerm
+    ? users.filter(
+        (el) =>
+          // console.log("el ==>", el)
+          el.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          el.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          el.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          el.password.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          el.age.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          el.phone.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : users && selectTerm
+    ? users.filter(
+        (el) =>
+          // console.log("el==>",el)
+          el.city.toLowerCase().includes(selectTerm.toLowerCase()) ||
+          el.gender.toLowerCase() === selectTerm.toLowerCase() || 
+          el.languages.join().toLowerCase().includes(selectTerm.toLowerCase())
+
+      )
+    : users;
+
+  // console.log("filterList==>", filterList);
 
   return (
     <>
@@ -129,6 +240,9 @@ const Crud = () => {
                     onChange={handleChange}
                     value={formData.firstName}
                   />
+                  {errors.firstName && (
+                    <span className="error-message">{errors.firstName}</span>
+                  )}
                 </div>
               </div>
 
@@ -141,8 +255,10 @@ const Crud = () => {
                     name="lastName"
                     onChange={handleChange}
                     value={formData.lastName}
-
                   />
+                  {errors.lastName && (
+                    <span className="error-message">{errors.lastName}</span>
+                  )}
                 </div>
               </div>
             </div>
@@ -158,6 +274,9 @@ const Crud = () => {
                     onChange={handleChange}
                     value={formData.email}
                   />
+                  {errors.email && (
+                    <span className="error-message">{errors.email}</span>
+                  )}
                 </div>
               </div>
 
@@ -170,8 +289,10 @@ const Crud = () => {
                     name="password"
                     onChange={handleChange}
                     value={formData.password}
-                    
                   />
+                  {errors.password && (
+                    <span className="error-message">{errors.password}</span>
+                  )}
                 </div>
               </div>
             </div>
@@ -187,7 +308,6 @@ const Crud = () => {
                   name="gender"
                   onChange={handleChange}
                   checked={formData.gender === "Male"}
-
                 />
                 &nbsp; Male &nbsp;
                 <input
@@ -196,9 +316,12 @@ const Crud = () => {
                   value="Female"
                   name="gender"
                   onChange={handleChange}
-                  checked={formData.gender === "Male"}
+                  checked={formData.gender === "Female"}
                 />
                 &nbsp; Female &nbsp;
+                {errors.gender && (
+                  <span className="error-message">{errors.gender}</span>
+                )}
               </div>
 
               <div className="mb-3 col-6 ms-5">
@@ -207,13 +330,16 @@ const Crud = () => {
                   className="form-select"
                   name="city"
                   onChange={handleChange}
-                   value={formData.city}
+                  value={formData.city}
                 >
                   <option value="">Select City</option>
                   <option value="Surat">Surat</option>
                   <option value="Jamnagar">Jamnagar</option>
                   <option value="Vadodara">Vadodara</option>
                 </select>
+                {errors.city && (
+                  <span className="error-message">{errors.city}</span>
+                )}
               </div>
             </div>
 
@@ -248,6 +374,10 @@ const Crud = () => {
                   checked={formData.languages.includes("Gujrati")}
                 />
                 &nbsp; Gujrati &nbsp;
+                <br />
+                {errors.languages && (
+                  <span className="error-message">{errors.languages}</span>
+                )}
               </div>
             </div>
 
@@ -264,6 +394,9 @@ const Crud = () => {
                     onChange={handleChange}
                     value={formData.age}
                   />
+                  {errors.age && (
+                    <span className="error-message">{errors.age}</span>
+                  )}
                 </div>
               </div>
 
@@ -279,6 +412,9 @@ const Crud = () => {
                     onChange={handleChange}
                     value={formData.phone}
                   />
+                  {errors.phone && (
+                    <span className="error-message">{errors.phone}</span>
+                  )}
                 </div>
               </div>
             </div>
@@ -293,6 +429,63 @@ const Crud = () => {
 
       <br />
       <br />
+      {/* filter */}
+      <div>
+        <div className="mb-3 col-4 ms-4">
+          <label className="form-label">Search Here</label>
+          <input
+            type="text"
+            className="form-control"
+            name="search"
+            placeholder="Search Here"
+            onChange={searchHandler}
+            value={searchTerm}
+          />
+        </div>
+      </div>
+      <div className="d-flex gap-2">
+        <div className="mb-3 col-3 ms-5">
+          <label className="form-label">Select City</label>
+          <select
+            className="form-select"
+            name="findCity"
+            onChange={selectHandler}
+            value={selectTerm}
+          >
+            <option value="">Select City</option>
+            <option value="Surat">Surat</option>
+            <option value="Jamnagar">Jamnagar</option>
+            <option value="Vadodara">Vadodara</option>
+          </select>
+        </div>
+        <div className="mb-3 col-3 ms-5">
+          <label className="form-label">Select Gender</label>
+          <select
+            className="form-select"
+            name="findGender"
+            onChange={selectHandler}
+            value={selectTerm}
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div className="mb-3 col-3 ms-5">
+          <label className="form-label">Select Language</label>
+          <select
+            className="form-select"
+            name="findLanguage"
+            onChange={selectHandler}
+            value={selectTerm}
+          >
+            <option value="">Select Language</option>
+            <option value="English">English</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Gujrati">Gujrati</option>
+          </select>
+        </div>
+      </div>
       <div>
         <table className="table table-dark">
           <thead>
@@ -306,12 +499,13 @@ const Crud = () => {
               <th>City</th>
               <th>Languages</th>
               <th>Age</th>
+              <th>Phone</th>
               <th>Delete</th>
               <th>Update</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {filterList.map((user, index) => (
               // console.log("user===>",user)
               <tr key={index}>
                 <td>{index + 1}</td>
@@ -323,6 +517,7 @@ const Crud = () => {
                 <td>{user.city}</td>
                 <td>{user.languages.join(",")}</td>
                 <td>{user.age}</td>
+                <td>{user.phone}</td>
                 <td>
                   <button
                     className="btn btn-light"
@@ -334,7 +529,7 @@ const Crud = () => {
                 <td>
                   <button
                     className="btn btn-light"
-                    onClick={() => UpdateHandler(user)}
+                    onClick={() => UpdateHandler(user, index)}
                   >
                     Update
                   </button>

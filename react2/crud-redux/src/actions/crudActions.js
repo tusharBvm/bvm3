@@ -11,19 +11,17 @@ export const addUser = (user) => ({
 
 export const deleteUser = (index) => ({
   type: DELETE_USER,
-  payload:index
-})
+  payload: index,
+});
 
-export const updateUser = (user) => ({
+export const updateUser = (index,user) => ({
   type: UPDATE_USER,
-  payload:user
-})
-
-
+  payload: {index,user},
+});
 
 // export const deleteUser = (index) => {
 //     // console.log("index==>",index);
-    
+
 //   return {
 //     type: DELETE_USER,
 //     payload: index,
@@ -32,10 +30,9 @@ export const updateUser = (user) => ({
 
 // export const addUser = (user) => {
 //     // console.log("user==>",user);
-    
+
 //   return {
 //     type: ADD_USER,
 //     payload: user,
 //   };
 // };
-
