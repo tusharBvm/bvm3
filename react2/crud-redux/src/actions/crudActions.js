@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 
 export const ADD_USER = "ADD_USER";
 export const DELETE_USER = "DELETE_USER";
@@ -27,6 +26,7 @@ export const updateUser = (index,user) => ({
 //     payload: index,
 //   };
 // };
+
 
 // export const addUser = (user) => {
 //     // console.log("user==>",user);

@@ -19,12 +19,30 @@ const Crud = () => {
     age: "",
     phone: "",
   };
+
   const [formData, setFormData] = useState(form);
   // console.log("formData==>", formData);
   const [editIndex, setEditIndex] = useState(null);
   const [errors, setErrors] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [selectTerm, setSelectTerm] = useState("");
+
+  const tableHead = [
+    "No",
+    "FirstName",
+    "LastName",
+    "Email",
+    "Password",
+    "Gender",
+    "City",
+    "Languages",
+    "Age",
+    "Phone",
+    "Delete",
+    "Update",
+  ];
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,13 +61,14 @@ const Crud = () => {
     const { value, checked } = e.target;
     let updatedLanguages = [...formData.languages];
     // console.log("updatedLanguages==>",updatedLanguages);
+    // 
+    
 
     if (checked) {
       updatedLanguages.push(value);
     } else {
       updatedLanguages = updatedLanguages.filter((lang) => lang !== value);
     }
-
     setFormData({ ...formData, languages: updatedLanguages });
   };
 
@@ -71,6 +90,7 @@ const Crud = () => {
     // console.log("lastName==>",lastName);
 
     // console.log("formData==>",formData);
+
 
     const newErrors = validateForm({
       firstName,
@@ -185,13 +205,13 @@ const Crud = () => {
         (el) =>
           // console.log("el==>",el)
           el.city.toLowerCase().includes(selectTerm.toLowerCase()) ||
-          el.gender.toLowerCase() === selectTerm.toLowerCase() || 
+          el.gender.toLowerCase() === selectTerm.toLowerCase() ||
           el.languages.join().toLowerCase().includes(selectTerm.toLowerCase())
-
       )
     : users;
 
   // console.log("filterList==>", filterList);
+  
 
   return (
     <>
@@ -419,7 +439,7 @@ const Crud = () => {
               </div>
             </div>
             <div className="mb-3 mt-3">
-              <button type="submit" className="form-control ">
+              <button type="submit" className="form-control submit">
                 Submit
               </button>
             </div>
@@ -430,6 +450,7 @@ const Crud = () => {
       <br />
       <br />
       {/* filter */}
+     
       <div>
         <div className="mb-3 col-4 ms-4">
           <label className="form-label">Search Here</label>
@@ -486,14 +507,15 @@ const Crud = () => {
           </select>
         </div>
       </div>
+      <br />
       <div>
         <table className="table table-dark">
           <thead>
             <tr>
-              <th>No</th>
+              {/* <th>No</th>
               <th>FirstName</th>
               <th>LastName</th>
-              <th>Email</th>
+              <th>Email</th>  
               <th>Password</th>
               <th>Gender</th>
               <th>City</th>
@@ -501,7 +523,10 @@ const Crud = () => {
               <th>Age</th>
               <th>Phone</th>
               <th>Delete</th>
-              <th>Update</th>
+              <th>Update</th> */}
+              {tableHead.map((th, index) => (
+                <th key={index}>{th}</th>
+              ))}
             </tr>
           </thead>
           <tbody>

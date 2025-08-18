@@ -60,4 +60,54 @@ export default configureStore({
     reducer:{
       counter:  counterReducer
     }
-})																									
+})	
+
+
+////  redux persist (data store in local storage)
+
+installtion command ::==> npm i redux-persist 
+
+(step ::==> 1)change code in store  
+
+----->  storage import krvan nu path (npm pakage mathi lai levo) 
+
+import { createStore } from "redux";
+import crudReducer from "../reducers/crudReducer";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, crudReducer);
+
+export const store = createStore(persistedReducer);
+
+export const persistor = persistStore(store);
+
+export default store;
+
+(step ::==> 2) change in index.js file 
+
+ =====>  PersistGate  me wrap karva nu provider ma path npm pakage mathi lai leva no
+ 
+import { store, persistor } from "./app/store";
+import { PersistGate } from "redux-persist/integration/react";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
+);
+
+
+
+																								

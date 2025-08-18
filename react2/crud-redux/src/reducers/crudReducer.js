@@ -5,7 +5,9 @@ const initialState = {
 };
 
 const crudReducer = (state = initialState, action) => {
-  // console.log("action ==>",action.type);
+  // console.log("action of type ==>",action.type);
+  // console.log("action payload ==>",action.payload)
+  
   // console.log("state ==>",state);
   switch (action.type) {
     case ADD_USER:
@@ -23,7 +25,9 @@ const crudReducer = (state = initialState, action) => {
     case UPDATE_USER:
       const { index, user } = action.payload;
       const updatedUsers = [...state.users];
+      // console.log("updatedUsers===>",updatedUsers)
       updatedUsers[index] = user;
+      // console.log("user==>",user);
       return {
         ...state,
         users: updatedUsers,
