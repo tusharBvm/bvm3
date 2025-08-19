@@ -8,7 +8,11 @@ const Crud = () => {
   const { users } = useSelector((state) => state);
   // console.log("users=>",users);
 
+  // let data = Date.now()
+  // console.log("data ==>",data);
+
   const form = {
+    id: Date.now(),
     firstName: "",
     lastName: "",
     email: "",
@@ -38,11 +42,10 @@ const Crud = () => {
     "Languages",
     "Age",
     "Phone",
+    // "Id",
     "Delete",
     "Update",
   ];
-
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,8 +64,6 @@ const Crud = () => {
     const { value, checked } = e.target;
     let updatedLanguages = [...formData.languages];
     // console.log("updatedLanguages==>",updatedLanguages);
-    // 
-    
 
     if (checked) {
       updatedLanguages.push(value);
@@ -91,7 +92,6 @@ const Crud = () => {
 
     // console.log("formData==>",formData);
 
-
     const newErrors = validateForm({
       firstName,
       lastName,
@@ -106,9 +106,21 @@ const Crud = () => {
     // console.log("newErrors==>", newErrors);
     setErrors(newErrors);
 
+    //   if (Object.keys(newErrors).length === 0) {
+    //     if (editIndex !== null) {
+    //       dispatch(updateUser(editIndex, formData));
+    //       setFormData(form);
+    //       setEditIndex(null);
+    //     } else {
+    //       dispatch(addUser({ ...formData }));
+    //       setFormData(form);
+    //     }
+    //   }
+    // };
+
     if (Object.keys(newErrors).length === 0) {
       if (editIndex !== null) {
-        dispatch(updateUser(editIndex, formData));
+        dispatch(updateUser(formData));
         setFormData(form);
         setEditIndex(null);
       } else {
@@ -118,15 +130,27 @@ const Crud = () => {
     }
   };
 
-  const DeleteHandler = (index) => {
-    // console.log("index==>",index);
-    dispatch(deleteUser(index));
+  // const DeleteHandler = (index) => {
+  //   // console.log("index==>",index);
+  //   dispatch(deleteUser(index));
+  // };
+
+  const DeleteHandler = (id) => {
+    // console.log("id==>",id);
+    dispatch(deleteUser(id));
   };
 
-  const UpdateHandler = (user, index) => {
+  // const UpdateHandler = (user, index) => {
+  //   // console.log("user==>", user);
+  //   setFormData(user);
+  //   setEditIndex(index);
+  // };
+
+  const UpdateHandler = (user) => {
     // console.log("user==>", user);
+    // console.log("userId==>", userId);
     setFormData(user);
-    setEditIndex(index);
+    setEditIndex(user.id);
   };
 
   const validateForm = (errorData) => {
@@ -211,7 +235,6 @@ const Crud = () => {
     : users;
 
   // console.log("filterList==>", filterList);
-  
 
   return (
     <>
@@ -450,7 +473,7 @@ const Crud = () => {
       <br />
       <br />
       {/* filter */}
-     
+
       <div>
         <div className="mb-3 col-4 ms-4">
           <label className="form-label">Search Here</label>
@@ -543,10 +566,12 @@ const Crud = () => {
                 <td>{user.languages.join(",")}</td>
                 <td>{user.age}</td>
                 <td>{user.phone}</td>
+                {/* <td>{user.id}</td> */}
                 <td>
                   <button
                     className="btn btn-light"
-                    onClick={() => DeleteHandler(index)}
+                    // onClick={() => DeleteHandler(index)}
+                    onClick={() => DeleteHandler(user.id)}
                   >
                     Delete
                   </button>
@@ -554,7 +579,8 @@ const Crud = () => {
                 <td>
                   <button
                     className="btn btn-light"
-                    onClick={() => UpdateHandler(user, index)}
+                    // onClick={() => UpdateHandler(user, index)}
+                    onClick={() => UpdateHandler(user)}
                   >
                     Update
                   </button>
