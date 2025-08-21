@@ -3,6 +3,7 @@
     padding: 0 ;
     box-sizing: border-box;
     text-decoration: none !important;
+    /* scroll-behavior: smooth; */
 }
 
 .bg{
@@ -15,9 +16,20 @@
      justify-content: space-between;
      align-items: center;
      background-color:  #fa811e;
-     padding: 16px;
+     /* padding: 16px; */
      font-family: "Alata", Helvetica, Arial, sans-serif;
+    
+}
+
+.border-btm{
+     padding: 16px;
      border-bottom: 1px solid white;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  padding: 10px 16px;
 }
 
 .spacing{
@@ -32,7 +44,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     width: 100%;
-    padding: 20px;
+    padding-bottom: 130px;
     
 }
 
@@ -222,3 +234,279 @@
 .story-span2 a{
     color: #fa811e;
 }
+
+.story-cnt2 h2{
+    font-size: 70px;
+}
+
+
+.speicial-p{
+    font-size: 20px;
+    line-height: 30px;
+    font-weight:700;
+    color: #a5d5c4;
+}
+.special-h1{
+    font-size: 70px;
+    line-height: 70px;
+    font-weight: 700;
+    color: #2a2c2c;
+}
+.dish-p{
+    font-size: 18px;
+    line-height: 31px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+.pb-80{
+    padding-bottom: 80px;
+}
+.photo-p{
+      font-size: 20px;
+    line-height: 30px;
+    font-weight:700;
+    color: #fa811e;
+}
+.theme{
+    color: #fa811e;
+}
+.gallery-img{
+    width: 100%;
+}
+
+.footer-bg{
+    background-color: #422626;
+}
+.footer-h1{
+     font-size: 70px;
+    line-height: 70px;
+    font-weight: 700;
+    color: #fa811e;
+}
+.footer-p{
+        font-size: 20px;
+    line-height: 30px;
+    font-weight:700;
+    color: white;
+}
+.footer-h2{
+    color: #fa811e;
+    font-weight: 700;
+    line-height: 32px;
+}
+.footer-p2{
+        font-size: 20px;
+    line-height: 30px;
+    font-weight:700;
+    color: #fa811e;
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) { 
+    .p-100{
+        padding: 0px;
+        margin-top: 20px;
+    }
+    .space{
+        padding-top: 80px;
+    }
+    .why-cnt {
+        font-size: 14px;
+        }
+
+    .eating-cnt h2{
+    font-size: 32px;
+    }
+
+    .eating-span{
+    font-size: 19px;
+    }
+
+ 
+ }
+
+ @media (min-width: 768px) and (max-width: 1024px) { 
+
+
+      .p-100{
+        padding: 0px;
+        margin-top: 20px;
+    }
+
+     .space{
+        padding-top: 80px;
+    }
+
+    .border-cnt{
+        width: 26%;
+    }
+
+     .eating-cnt h2{
+        font-size: 26px;
+        line-height: 30px;
+    }
+    
+    .eating-span{
+        font-size: 16px;
+    }
+
+    .dishes-cnt h1{
+        overflow: hidden;
+        font-size: 60px;
+        line-height: 60px;
+    }
+
+    .dishes-cnt h4{
+        overflow: hidden;
+    }
+    .dishes-span {
+        font-size: 14px;
+    }
+
+    .dishes-cnt p{
+        font-size: 17px;
+        line-height: 26px;
+    }
+
+     .dishes-cnt h4{
+        font-size: 17px;
+        line-height: 26px;
+    }
+
+    .dishes-hr{
+        width: 100%;
+        margin: 10px 0px;
+    }
+
+   .mt-130{
+    margin-top: 130px;
+   }
+
+    
+ }
+
+  @media (min-width: 425px) and (max-width: 768px) { 
+
+    *{
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+      .p-100{
+        padding: 0px;
+        margin-top: 20px;
+    }
+
+      .space{
+        padding-top: 80px;
+    }
+
+     .space{
+        padding-top: 80px;
+    }
+
+      .why-cnt {
+        font-size: 14px;
+        }
+
+    .border-cnt{
+        width: 18%;
+    }
+
+     .eating-cnt h2{
+        font-size: 18px;
+        line-height: 18px;
+        overflow: hidden;
+    }
+    
+    .eating-span{
+        font-size: 13px;
+    }
+
+    .pd{
+        padding: 15px;
+    }
+
+     .dishes-cnt h1{
+        overflow: hidden;
+        font-size: 42px;
+        line-height: 42px;
+    }
+
+    .dishes-cnt h4{
+        overflow: hidden;
+       
+    }
+    .dishes-span {
+        font-size: 14px;
+    }
+
+    .dishes-cnt p{
+         font-size: 13px;
+        line-height: 19px;
+        margin-bottom: 25px;
+    }
+
+     .dishes-cnt h4{
+        font-size: 17px;
+        line-height: 26px;
+    }
+
+    .dishes-hr{
+        width: 100%;
+        margin: 10px 0px;
+    }
+
+    
+ }
+
+ 
+  @media (min-width: 320px) and (max-width: 425px) { 
+
+    *{
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+      .p-100{
+        padding: 0px;
+        margin-top: 20px;
+    }
+
+      .space{
+        padding-top: 80px;
+    }
+
+     .space{
+        padding-top: 80px;
+    }
+
+      .why-cnt {
+        font-size: 12px;
+        }
+
+    .border-cnt{
+        width: 13%;
+    }
+
+     .eating-cnt h2{
+        font-size: 18px;
+        line-height: 18px;
+        overflow: hidden;
+    }
+    
+    .eating-span{
+        font-size: 13px;
+    }
+
+    .menu-btn {
+        padding: 6px 25px;
+    }
+
+    .menu-btn a {
+        font-size: 12px;
+    }
+    
+    
+ }
