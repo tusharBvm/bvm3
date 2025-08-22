@@ -59,7 +59,7 @@ function FreshMeal() {
           </nav>
         </div>
       </div>
-      {/* header end  */}
+      {/* header end   */}
 
       {/* img-cnt  start*/}
       <div className="container-fluid d-flex p-0 main bg">
@@ -87,7 +87,7 @@ function FreshMeal() {
       <div className="container-fluid space" id="about">
         <div className="container">
           <div class="row ">
-            <div class="col-md-6 col-12 space-2">
+            <div class="col-md-6 col-12 space-2 mt-70">
               <img className="bistro-img " src={bistro} alt="" />
             </div>
             <div class="col-md-6 col-12 space-2">
@@ -102,10 +102,11 @@ function FreshMeal() {
 
                 <hr />
                 <div className="row mt-55">
-                  <div className="col-1">
+                  <div className="col-xl-1 col-lg-1 col-md-2 col-2">
                     <IoLocationSharp size={35} color="#fa811e" />
                   </div>
-                  <div className="col-4">
+                  {/* col-4   col-lg-4 col-md-5*/}
+                  <div className=" col-xl-5 col-lg-6 col-md-8 col-8"> 
                     <span className="icon-span">
                       Level 13, 2 Elizabeth St, Melbourne, Victoria 3000,
                       Australia
@@ -253,10 +254,10 @@ function FreshMeal() {
       {/* selected dishes end */}
 
       {/* story start */}
-      <div className="container-fluid bg-story " id="story">
+      <div className="container-fluid bg-story p-30 " id="story">
         <div className="container">
           <div className="row">
-            <div className="col-6 space">
+            <div className="col-md-6 col-12 space pv-0 pt-25">
               <div className="story-cnt mt-55">
                 <div className="mb-40">
                   <p>Our story</p>
@@ -280,13 +281,13 @@ function FreshMeal() {
                 </div>
               </div>
             </div>
-            <div className="col-6 ">
+            <div className="col-md-6 col-12">
               <div>
                 <img src={story} className="bistro-img" alt="" />
               </div>
               <div className="row">
-                <div className="col-4"></div>
-                <div className="story-cnt2 col-6 ">
+                <div className="col-md-4 col-12"></div>
+                <div className="story-cnt2 col-lg-6 col-12 pm mb-80">
                   <div className="mb-40">
                     <h2>1997</h2>
                     <span className="eating-span">
@@ -313,11 +314,11 @@ function FreshMeal() {
       <div className="container-fluid space" id="speical">
         <div className="container">
           <div className="row ">
-            <div className="col-9">
+            <div className="col-md-9 col-12">
               <p className="speicial-p">What we offer</p>
               <h1 className="special-h1">Our specials</h1>
             </div>
-            <div className="col-3">
+            <div className="col-md-3 col-12 ml-230">
               <img src={logo2} alt="" />
             </div>
           </div>
@@ -326,7 +327,7 @@ function FreshMeal() {
 
       {/* col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 */}
 
-      <div className="container-fluid pb-80">
+      <div className="container-fluid pb-80 plr-25">
         <div className="container">
           <div className="row">
             <div className="col-md-4 col-12">
@@ -368,7 +369,7 @@ function FreshMeal() {
         <div className="container">
           <div className="text-center">
             <h4 className="theme">BE BISTRO</h4>
-            <h1 className="special-h1">
+            <h1 className="special-h1  lh fs">
               See our photos <br /> on instagram
             </h1>
             <img className="gallery-img mt-55" src={gallery} alt="" />
@@ -388,13 +389,13 @@ function FreshMeal() {
           <img src={logo2} alt="" />
           <h1 className="footer-h1 mt-3">Contact us</h1>
           <div className="row">
-            <div className="col-3">
+            <div className=" col-lg-4 col-md-5  col-12">
               <p className="footer-p mt-5">
                 Level 13, 2 Elizabeth St, Melbourne, Victoria 3000, Australia
               </p>
               <p className="footer-p mt-5">Everyday: 7 AM - 8 PM</p>
             </div>
-            <div className="col-4">
+            <div className="col-md-5 col-12">
               <p className="footer-p mt-5">Phone</p>
               <h2 className="footer-h2">+61 (0) 3 8376 6284</h2>
               <p className="footer-p mt-5">E-mail</p>

@@ -237,6 +237,7 @@
 
 .story-cnt2 h2{
     font-size: 70px;
+    font-weight: 700;
 }
 
 
@@ -321,6 +322,43 @@
     font-size: 19px;
     }
 
+    .story-cnt h1{
+        font-size: 65px;
+        line-height: 65px;
+    }
+
+    .story-span{
+        font-size: 17px;
+    }
+
+    .pm{
+        padding: 0 !important;
+        margin-left: 0 !important;
+    }
+
+      .special-h1{
+        font-size: 70px !important;
+        line-height: 98px !important;
+    }
+
+     .dish-p{
+        font-size: 18px !important;
+    }
+    .theme{
+        font-size: 20.4px !important;
+    }
+
+    .footer-h1{
+        overflow: hidden;
+        font-size: 70px !important;
+        font-size: 70px !important;
+    }
+
+    .bistro-cnt h1{
+      font-size: 70px !important;
+      line-height: 70px !important;
+    }
+
  
  }
 
@@ -381,7 +419,86 @@
     margin-top: 130px;
    }
 
-    
+   .story-cnt p {
+    font-size: 20px !important;
+    line-height: 30px !important;
+   }
+
+     .story-cnt h1{
+        font-size: 60px !important;
+        line-height: 60px !important;
+        overflow: hidden;
+    }
+
+    .story-span{
+        font-size: 15px !important;
+        line-height: 30px;
+    }
+
+    .story-cnt2 h2{
+        overflow: hidden;
+        font-size: 60px !important;
+    }
+    .pm{
+        padding: 77px;
+        margin-left: 40px
+    }
+    .pv-0{
+        padding-bottom: 80px !important;
+    }
+    .special-h1{
+        overflow: hidden;
+        font-size: 60px !important;
+        line-height: 80px !important;
+    }
+
+    .speicial-p{
+        font-size: 20px !important;
+    }
+
+    .dish-p{
+        font-size: 15px;
+    }
+
+     /* .ml-230{
+        margin-left: 0px !important;
+    } */
+
+    .ml-230{
+        margin-left: 0px !important;
+    }
+
+    .plr-25{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .theme{
+        font-size: 17px !important;
+    }
+
+    .footer-h1{
+        overflow: hidden;
+        font-size: 60px !important; 
+        line-height: 60px !important;
+    }
+
+     .footer-h2{
+        overflow: hidden;
+    }
+    .theme{
+        overflow: hidden;
+    }
+    .bistro-cnt h1{
+        overflow: hidden;
+        font-size: 57px !important;
+        line-height: 57px !important ;
+    }
+
+    .mt-70{
+        margin-top: 70px;
+    }
+ 
  }
 
   @media (min-width: 425px) and (max-width: 768px) { 
@@ -400,11 +517,6 @@
       .space{
         padding-top: 80px;
     }
-
-     .space{
-        padding-top: 80px;
-    }
-
       .why-cnt {
         font-size: 14px;
         }
@@ -457,8 +569,117 @@
         margin: 10px 0px;
     }
 
+    .story-cnt p {
+        font-size: 13px;
+        line-height: 19px;
+    }
+
     
+     .story-cnt h1{
+        font-size: 42px;
+        line-height: 42px;
+        overflow: hidden;
+    }
+
+    .story-span{
+        font-size: 14px;
+    }
+
+    .story-cnt2 h2{
+        overflow: hidden;
+        font-size: 44px;
+    }    
+       .pv-0{
+        padding-bottom: 0 ;
+    }
+       .mb-80{
+        margin-bottom: 80px;
+    }
+
+    .special-h1{
+        overflow: hidden;
+        font-size: 42px;
+        line-height: 72px;
+    }
+
+    .dish-p{
+        font-size: 15px;
+    }
+    .speicial-p{
+        font-size: 13px;
+        margin: 0;
+    }
+    .ml-230{
+        margin-left: 230px ;
+    }
+
+    .plr-25{
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .lh{
+        line-height: 54px !important;
+    }
+
+    .theme{
+        font-size: 13px;
+        line-height: 19px;
+    }
+
+    .footer-h1{
+        overflow: hidden;
+        font-size: 42px  ;
+        line-height: 42px;
+    }
+
+     .bistro-cnt h1{
+        overflow: hidden;
+        font-size: 43px;
+        line-height: 43px ;
+    }
  }
+
+/* 
+  @media (min-width: 375px) and (max-width: 425px) {
+
+    .space{
+        padding-top: 80px;
+    }
+    .pd{
+        padding: 15px;
+    }
+
+     .dishes-cnt h1{
+        overflow: hidden;
+        font-size: 42px;
+        line-height: 42px;
+    }
+
+    .dishes-cnt h4{
+        overflow: hidden;
+       
+    }
+    .dishes-span {
+        font-size: 14px;
+    }
+
+    .dishes-cnt p{
+         font-size: 13px;
+        line-height: 19px;
+        margin-bottom: 25px;
+    }
+
+     .dishes-cnt h4{
+        font-size: 17px;
+        line-height: 26px;
+    }
+
+    .dishes-hr{
+        width: 100%;
+        margin: 10px 0px;
+    }
+
+   } */
 
  
   @media (min-width: 320px) and (max-width: 425px) { 
@@ -472,10 +693,6 @@
       .p-100{
         padding: 0px;
         margin-top: 20px;
-    }
-
-      .space{
-        padding-top: 80px;
     }
 
      .space{
@@ -507,6 +724,121 @@
     .menu-btn a {
         font-size: 12px;
     }
+
+    .story-cnt p {
+        font-size: 13px;
+        line-height: 19px;
+    }
+
     
+     .story-cnt h1{
+        font-size: 42px;
+        line-height: 42px;
+        overflow: hidden;
+    }
+
+    .story-span{
+        font-size: 14px;
+    }
+
+    .story-cnt2 h2{
+        overflow: hidden;
+        font-size: 44px;
+    }    
+       .pv-0{
+        padding-bottom: 0 ;
+    }
+       .mb-80{
+        margin-bottom: 80px;
+    }
+
+    .special-h1{
+        overflow: hidden;
+        font-size: 42px !important;
+        line-height: 72px;
+    }
+
+    .dish-p{
+        font-size: 15px;
+    }
+    .speicial-p{
+        font-size: 13px;
+        margin: 0;
+    }
+    .ml-230{
+        margin-left: 130px;
+    }
+
+    .plr-25{
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .lh{
+        line-height: 54px !important;
+    }
+
+    .theme{
+        font-size: 13px;
+        line-height: 19px;
+    }   
+    
+   .fs{
+    font-size: 36px !important;
+   }
+
+    .footer-h1{
+        overflow: hidden;
+        font-size: 42px  ;
+        line-height: 42px;
+    }
+
+        .bistro-cnt h1{
+        overflow: hidden;
+        font-size: 43px;
+        line-height: 43px ;
+        
+    }
     
  }
+
+  @media (min-width: 320px) and (max-width: 375px){
+        .space{
+        padding-top: 30px;
+    }
+    .pd{
+        padding: 15px;
+    }
+
+     .dishes-cnt h1{
+        overflow: hidden;
+        font-size: 42px;
+        line-height: 42px;
+    }
+
+    .dishes-cnt h4{
+        overflow: hidden;
+        font-size: 14px !important;
+       
+    }
+    .dishes-span {
+        font-size: 14px;
+    }
+
+    .dishes-cnt p{
+         font-size: 13px;
+        line-height: 19px;
+        margin-bottom: 25px;
+    }
+
+     .dishes-cnt h4{
+        font-size: 17px;
+        line-height: 26px;
+    }
+
+    .dishes-hr{
+        width: 100%;
+        margin: 10px 0px;
+    }
+  }
+
