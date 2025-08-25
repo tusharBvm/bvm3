@@ -9,8 +9,8 @@ import './Assets/CSS/header.css'
 function App() {
   return (
   <>
-  {/* <FreshMeal/>   */}
-  <Header/>
+  <FreshMeal/>  
+  {/* <Header/> */}
   </>
   );
 }
