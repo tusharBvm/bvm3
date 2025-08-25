@@ -73,32 +73,37 @@
     margin-bottom:25px;
     width: 40%;
 } */
+
+
+ 
  .bg-body-tertiary{
   background-color: transparent !important;
 }
 .bg-img{
     position: relative;
 }
-  .bistro-nav{
-    position: absolute;
+  #bistro-nav{
+    overflow: hidden;
+    position: fixed;
+    transition: 0.4s; 
+    width: 100%;
+    top: 0; 
+    z-index: 99;
   }
 
 .bg-img-set{
   width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-
 }
-.mt-15{
+#mt-15{
     margin-top: 20px ;
 }
 .p-16{
   padding-left: 14px !important;
   padding-right: 14px !important;
 }
-.p-30{
+/* .p-30{
   padding: 20px !important;
-}
+} */
 
 .health{
   display: flex;
@@ -362,6 +367,41 @@
     font-weight:700;
     color: #fa811e;
 }
+.bgr{
+    background-color: #271616 ;
+}
+
+.offcanvas {
+    width: 25% !important;
+    color: white;
+}
+
+/* .class="btn-close" */
+.btn-close{
+    background-color: white !important;
+}
+
+
+
+
+@media (max-width:1440px){
+    .health-h1{
+        font-size: 70px !important;
+    }
+}
+
+@media (max-width:1024px){
+    .health-h1{
+        font-size: 48px !important;
+    }
+
+    .mtr{
+        margin-right: 140px;
+        margin-top:70px;
+    }
+
+}
+  
 
 @media (min-width: 1024px) and (max-width: 1440px) { 
     .p-100{
@@ -419,6 +459,10 @@
       font-size: 70px !important;
       line-height: 70px !important;
     }
+/* 
+    .health-h1{
+        font-size: 48px !important;
+    } */
 
  
  }
@@ -523,6 +567,7 @@
 
      /* .ml-230{
         margin-left: 0px !important;
+        
     } */
 
     .ml-230{

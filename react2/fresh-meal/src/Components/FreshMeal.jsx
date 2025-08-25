@@ -19,7 +19,12 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import bread from "../Assets/images/bistro4-slider-pic1.jpeg";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-// import logo from "../Assets/images/logo.png";
+import border from "../Assets/images/border-img.png";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Offcanvas from "react-bootstrap/Offcanvas";
 
 function FreshMeal() {
   return (
@@ -87,34 +92,32 @@ function FreshMeal() {
       </div> */}
       {/* img-cnt end*/}
 
-        <div className="bistro">
+      <div className="bistro" id="start">
         <div className="container-fluid">
           <div className="bg-img row">
             <div className="col-6 p-0 bg ">
               <div className="health">
-                <h1 className="health-h1">
+                <h1 className="health-h1 mtr">
                   Healthy <br />
                   Fresh Meals
-                    <p className="health-p">
-                  {/* <span style={{ color: "#ffc61a" }}>Open everyday</span>{" "}
+                  <p className="health-p">
+                    {/* <span style={{ color: "#ffc61a" }}>Open everyday</span>{" "}
                   &nbsp;&nbsp; 7 PM - 8 AM  */}
-                  Open everyday 7 PM -  8 AM
-                </p>
+                    Open everyday 7 PM - 8 AM
+                  </p>
                   <button className="rounded-pill read-more"> Read more</button>
-
                 </h1>
-              
-
               </div>
             </div>
             <div className="col-6 p-0 ">
               <img className="bg-img-set" src={bread} alt="" />
             </div>
-            <div className="bistro-nav">
-              <Navbar
+            <div id="bistro-nav">
+              {/* <Navbar
                 collapseOnSelect
                 expand="lg"
-                className="bg-body-tertiary p-30 mt-15"
+                className="bg-body-tertiary p-30 "
+                id="mt-15"
               >
                 <Navbar.Brand>
                   <img src={logo} alt="" />
@@ -146,8 +149,64 @@ function FreshMeal() {
                     </Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
-              </Navbar>
-              {/* <div>
+              </Navbar> */}
+              {["xxl"].map((expand) => (
+                <Navbar
+                  key={expand}
+                  expand={expand}
+                  className="bg-body-tertiary mb-3"
+                  id="mt-15"
+                >
+                  <Container fluid>
+                    <Navbar.Brand>
+                      <img src={logo} alt="" />
+                    </Navbar.Brand>
+                    <Navbar.Toggle
+                      aria-controls={`offcanvasNavbar-expand-${expand}`}
+                    />
+                    <Navbar.Offcanvas
+                      id={`offcanvasNavbar-expand-${expand}`}
+                      aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+                      placement="end"
+                      className="bgr"
+                    >
+                      <Offcanvas.Header closeButton>
+                        {/* <Offcanvas.Title
+                          id={`offcanvasNavbarLabel-expand-${expand}`}
+                        >
+                          Offcanvas
+                        </Offcanvas.Title> */}
+                      </Offcanvas.Header>
+                      <Offcanvas.Body>
+                        <Nav className="justify-content-end flex-grow-1 pe-3">
+                          <Nav.Link href="#start" className="p-16 fw-bold">
+                            Start
+                          </Nav.Link>
+                          <Nav.Link href="#about" className="p-16 fw-bold">
+                            About
+                          </Nav.Link>
+                          <Nav.Link href="#menu" className="p-16 fw-bold">
+                            Menu
+                          </Nav.Link>
+                          <Nav.Link href="#story" className="p-16 fw-bold">
+                            Our Story
+                          </Nav.Link>
+                          <Nav.Link href="#speical" className="p-16 fw-bold">
+                            Our Specials
+                          </Nav.Link>
+                          <Nav.Link href="#contact" className="p-16 fw-bold">
+                            Contact
+                          </Nav.Link>
+                          <Nav.Link href="#" className="p-16 fw-bold">
+                            Buy Now
+                          </Nav.Link>
+                        </Nav>
+                      </Offcanvas.Body>
+                    </Navbar.Offcanvas>
+                  </Container>
+                </Navbar>
+              ))}
+              {/* <div id="border">
               <img src={border} alt="" />
               <img src={border} alt="" />
               <img src={border} alt="" />
@@ -166,13 +225,11 @@ function FreshMeal() {
               <img src={border} alt="" />
               <img src={border} alt="" />
             </div> */}
-              <hr style={{ color: "white" }} />
+              <hr style={{ color: "white" }} id="border" />
             </div>
           </div>
         </div>
       </div>
-
-
 
       {/* best-bistro start */}
       <div className="container-fluid space" id="about">
@@ -197,7 +254,7 @@ function FreshMeal() {
                     <IoLocationSharp size={35} color="#fa811e" />
                   </div>
                   {/* col-4   col-lg-4 col-md-5*/}
-                  <div className=" col-xl-5 col-lg-6 col-md-8 col-8"> 
+                  <div className=" col-xl-5 col-lg-6 col-md-8 col-8">
                     <span className="icon-span">
                       Level 13, 2 Elizabeth St, Melbourne, Victoria 3000,
                       Australia
@@ -480,7 +537,7 @@ function FreshMeal() {
           <img src={logo2} alt="" />
           <h1 className="footer-h1 mt-3">Contact us</h1>
           <div className="row">
-            <div className=" col-lg-4 col-md-5  col-12">
+            <div className=" col-lg-3 col-md-5 col-12">
               <p className="footer-p mt-5">
                 Level 13, 2 Elizabeth St, Melbourne, Victoria 3000, Australia
               </p>

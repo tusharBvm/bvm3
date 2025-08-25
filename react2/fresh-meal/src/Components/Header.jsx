@@ -20,13 +20,11 @@ function Header() {
                     <p className="health-p">
                   {/* <span style={{ color: "#ffc61a" }}>Open everyday</span>{" "}
                   &nbsp;&nbsp; 7 PM - 8 AM  */}
+                  {/* aa jo ketlu jordar pati yu maru ne set kari nakhu heder */}
                   Open everyday 7 PM -  8 AM
                 </p>
                   <button className="rounded-pill read-more"> Read more</button>
-
                 </h1>
-              
-
               </div>
             </div>
             <div className="col-6 p-0 ">
@@ -69,6 +67,7 @@ function Header() {
                   </Nav>
                 </Navbar.Collapse>
               </Navbar>
+              
               {/* <div>
               <img src={border} alt="" />
               <img src={border} alt="" />
@@ -93,7 +92,10 @@ function Header() {
           </div>
         </div>
       </div>
+                  
+      
     </>
+    
   );
 }
 
